@@ -1,0 +1,4 @@
+{
+  "stocks": {"timeframe": "5m", "symbols": ["SPY", "QQQ", "AAPL", "NVDA", "AMD", "MSFT", "TSLA", "AMZN"], "paper_first": ["SPY", "QQQ"]},
+  "crypto": {"timeframe": "15m", "symbols": ["BTC-USD", "ETH-USD"], "pending_independent_testing": ["SOL-USD"]}
+}

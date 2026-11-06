@@ -1,0 +1,24 @@
+{
+  "_doc": "Strategy enablement and fixed (untuned) parameters. research_only strategies never trade live.",
+  "enabled": {
+    "A_ORB": "paper",
+    "B_TREND": "paper",
+    "C_MOMENTUM": "paper",
+    "D_VWAP_MR": "research_only",
+    "E_CRYPTO_TREND": "paper",
+    "F_CRYPTO_PULLBACK": "paper",
+    "G_CRYPTO_VOLBRK": "research_only"
+  },
+  "params": {
+    "min_rr": 2.0,
+    "max_cost_to_risk": 0.25,
+    "orb_min_relvol": 1.5,
+    "momentum_min_relvol": 2.0,
+    "crypto_min_relvol": 1.5,
+    "adx_trend_min": 20.0,
+    "max_stop_atr": 2.5,
+    "min_stop_atr": 0.5,
+    "crypto_stop_atr": 2.0,
+    "last_entry_minute_et": 930
+  }
+}

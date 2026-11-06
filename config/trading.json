@@ -1,0 +1,67 @@
+{
+  "_doc": "Operating configuration. Default mode is RESEARCH. LIVE can only be set by scripts/agent.py set-mode after readiness checks and explicit operator confirmation; it expires and is bound to one Claude Code session.",
+  "default_mode": "RESEARCH",
+  "live_account": {
+    "account_number": "537538852",
+    "rhs_account_number": "537538852",
+    "nickname": "MCP"
+  },
+  "paper_starting_equity": 84.29,
+  "live_activation_max_hours": 8,
+  "authorization_ttl_sec": 120,
+  "readiness": {
+    "min_paper_days": 30,
+    "min_paper_trades": 30,
+    "require_backtest_acceptance": true
+  },
+  "costs": {
+    "crypto": {
+      "fee_bps": 95,
+      "slippage_bps": 2,
+      "spread_bps": 1,
+      "_note": "Measured 2026-11-06 via preview_crypto_order: Exchange Routing, volume-tiered fee 0.95% per side; BTC spread ~0.7bps, ETH ~1.4bps."
+    },
+    "stock": {
+      "fee_bps": 0,
+      "slippage_bps": 2,
+      "spread_bps": 2
+    }
+  },
+  "execution": {
+    "crypto": {
+      "max_spread_bps": 10,
+      "max_quote_age_sec": 15,
+      "max_move_bps": 40,
+      "aggressiveness": 0.25,
+      "slippage_bps": 5,
+      "min_imbalance": -0.6,
+      "max_order_age_sec": 120,
+      "max_retries": 1,
+      "min_retry_delay_sec": 10
+    },
+    "stock": {
+      "max_spread_bps": 10,
+      "max_quote_age_sec": 10,
+      "max_move_bps": 25,
+      "aggressiveness": 0.25,
+      "slippage_bps": 2,
+      "min_imbalance": -0.6,
+      "max_order_age_sec": 60,
+      "max_retries": 1,
+      "min_retry_delay_sec": 5
+    }
+  },
+  "crypto_max_hold_bars": 96,
+  "tick_size": {
+    "BTC-USD": 0.01,
+    "ETH-USD": 0.01,
+    "SOL-USD": 0.01,
+    "stock_default": 0.01
+  },
+  "qty_increment": {
+    "BTC-USD": 1e-08,
+    "ETH-USD": 1e-08,
+    "SOL-USD": 1e-06,
+    "stock_default": 1
+  }
+}

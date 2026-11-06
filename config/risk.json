@@ -1,0 +1,27 @@
+{
+  "_doc": "Capital-protection limits (fractions of equity). Loaded by scripts/agent.py and passed to risk_engine. Never loosen automatically.",
+  "risk_per_trade": 0.0025,
+  "caution_risk_per_trade": 0.0010,
+  "max_trade_risk": 0.0050,
+  "max_position_notional": 0.10,
+  "max_stock_exposure": 0.30,
+  "max_crypto_exposure": 0.15,
+  "max_total_exposure": 0.40,
+  "min_uncommitted": 0.60,
+  "max_open_positions": 3,
+  "max_trades_per_day": 6,
+  "daily_loss_limit": 0.01,
+  "weekly_loss_limit": 0.03,
+  "monthly_loss_limit": 0.05,
+  "caution_drawdown": 0.02,
+  "recovery_drawdown": 0.04,
+  "lock_drawdown": 0.08,
+  "pause_after_losses": 3,
+  "loss_cooldown_sec": 1800,
+  "correlated_risk_scale": 0.5,
+  "allowed_symbols": ["SPY", "QQQ", "AAPL", "NVDA", "AMD", "MSFT", "TSLA", "AMZN", "BTC-USD", "ETH-USD"],
+  "correlation_groups": {
+    "us_equity_tech": ["SPY", "QQQ", "AAPL", "NVDA", "AMD", "MSFT", "TSLA", "AMZN"],
+    "crypto_majors": ["BTC-USD", "ETH-USD", "SOL-USD"]
+  }
+}

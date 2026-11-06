@@ -1,0 +1,10 @@
+build/
+data/
+state/
+reports/*.json
+!reports/*.summary.json
+!reports/README.md
+__pycache__/
+*.pyc
+.mcp.json
+.envrc

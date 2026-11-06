@@ -1,0 +1,12 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "mcp__.*__(place_equity_order|place_crypto_order|place_option_order|place_advanced_order|exercise_option)",
+        "hooks": [
+          {"type": "command", "command": "python3 \"$CLAUDE_PROJECT_DIR\"/.claude/hooks/pre_order_gate.py", "timeout": 10}
+        ]
+      }
+    ]
+  }
+}
