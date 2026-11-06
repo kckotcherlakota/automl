@@ -1,0 +1,86 @@
+{
+  "symbol": "NVDA",
+  "timeframe": "1d",
+  "bars": 1255,
+  "report": "reports/backtest_NVDA_1d_2026-11-06.json",
+  "strategies": [
+    {
+      "strategy": "A_ORB",
+      "trades": 0,
+      "net_pnl": 0.0,
+      "win_rate": 0.0,
+      "profit_factor": null,
+      "max_dd": 0.0,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "B_TREND",
+      "trades": 10,
+      "net_pnl": 223.9,
+      "win_rate": 0.5,
+      "profit_factor": 2.7530331645988855,
+      "max_dd": 0.0101,
+      "oos_trades": 2,
+      "oos_expectancy": 11.1102,
+      "accepted": false,
+      "failures": [
+        "fewer than 30 trades (insufficient sample)"
+      ]
+    },
+    {
+      "strategy": "COMBINED",
+      "trades": 14,
+      "net_pnl": 206.47,
+      "win_rate": 0.5,
+      "profit_factor": 2.1404713238313033,
+      "max_dd": 0.0079,
+      "oos_trades": 4,
+      "oos_expectancy": -7.3997,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "fewer than 30 trades (insufficient sample)"
+      ]
+    },
+    {
+      "strategy": "C_MOMENTUM",
+      "trades": 1,
+      "net_pnl": -25.0,
+      "win_rate": 0.0,
+      "profit_factor": 0.0,
+      "max_dd": 0.0025,
+      "oos_trades": 1,
+      "oos_expectancy": -25.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "D_VWAP_MR",
+      "trades": 3,
+      "net_pnl": 7.97,
+      "win_rate": 0.667,
+      "profit_factor": 1.2967270106764202,
+      "max_dd": 0.0027,
+      "oos_trades": 1,
+      "oos_expectancy": -26.7712,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "fewer than 30 trades (insufficient sample)"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "symbol": "AMD",
+  "timeframe": "1d",
+  "bars": 1255,
+  "report": "reports/backtest_AMD_1d_2026-11-06.json",
+  "strategies": [
+    {
+      "strategy": "A_ORB",
+      "trades": 0,
+      "net_pnl": 0.0,
+      "win_rate": 0.0,
+      "profit_factor": null,
+      "max_dd": 0.0,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "B_TREND",
+      "trades": 7,
+      "net_pnl": -143.07,
+      "win_rate": 0.143,
+      "profit_factor": 0.1797992418714666,
+      "max_dd": 0.0174,
+      "oos_trades": 2,
+      "oos_expectancy": -37.5043,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "COMBINED",
+      "trades": 16,
+      "net_pnl": -209.08,
+      "win_rate": 0.25,
+      "profit_factor": 0.3219755602943875,
+      "max_dd": 0.0233,
+      "oos_trades": 2,
+      "oos_expectancy": -37.5043,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "C_MOMENTUM",
+      "trades": 0,
+      "net_pnl": 0.0,
+      "win_rate": 0.0,
+      "profit_factor": null,
+      "max_dd": 0.0,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "D_VWAP_MR",
+      "trades": 9,
+      "net_pnl": -66.97,
+      "win_rate": 0.333,
+      "profit_factor": 0.5038420554502128,
+      "max_dd": 0.01,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    }
+  ]
+}

@@ -82,18 +82,18 @@ BacktestResult run_backtest(const Context& c, const BacktestConfig& cfg, size_t 
       else if (b.h >= pos.t.target) close_pos(i, pos.t.target, "target");
       else {
         bool session_end = false;
-        if (c.ac == AssetClass::Stock) {
+        if (c.ac == AssetClass::Stock && c.tf < 86400) {
           const int m = et_minute_of_day(b.t);
           session_end = m + c.tf / 60 >= 960 || i + 1 >= to || et_date(bars[i + 1].t) != et_date(b.t);
         } else {
           session_end = static_cast<int>(i - pos.entry_i + 1) >= cfg.max_hold_bars;
         }
-        if (session_end) close_pos(i, b.c, c.ac == AssetClass::Stock ? "session_close" : "time_exit");
+        if (session_end) close_pos(i, b.c, (c.ac == AssetClass::Stock && c.tf < 86400) ? "session_close" : "time_exit");
         else if (i + 1 >= to) close_pos(i, b.c, "end_of_data");
       }
     }
     if (!pos.active && i + 1 < to && i + 1 >= cooldown_until) {
-      if (c.ac == AssetClass::Stock && et_date(bars[i + 1].t) != et_date(b.t)) goto mark;
+      if (c.ac == AssetClass::Stock && c.tf < 86400 && et_date(bars[i + 1].t) != et_date(b.t)) goto mark;
       {
         Signal best; best.score = -1e300; bool any = false;
         for (const auto& s : strats) {

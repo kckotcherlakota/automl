@@ -1,0 +1,76 @@
+{
+  "symbol": "BTC-USD",
+  "timeframe": "1d",
+  "bars": 1825,
+  "report": "reports/backtest_BTC-USD_1d_2026-11-06.json",
+  "strategies": [
+    {
+      "strategy": "COMBINED",
+      "trades": 6,
+      "net_pnl": -74.55,
+      "win_rate": 0.167,
+      "profit_factor": 0.39832324451873,
+      "max_dd": 0.0099,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "E_CRYPTO_TREND",
+      "trades": 2,
+      "net_pnl": -49.56,
+      "win_rate": 0.0,
+      "profit_factor": 0.0,
+      "max_dd": 0.005,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "F_CRYPTO_PULLBACK",
+      "trades": 4,
+      "net_pnl": -25.12,
+      "win_rate": 0.25,
+      "profit_factor": 0.6632858817850836,
+      "max_dd": 0.0074,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "G_CRYPTO_VOLBRK",
+      "trades": 0,
+      "net_pnl": 0.0,
+      "win_rate": 0.0,
+      "profit_factor": null,
+      "max_dd": 0.0,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    }
+  ]
+}

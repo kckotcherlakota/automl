@@ -86,6 +86,8 @@ std::vector<double> atr_series(const std::vector<Bar>& bars, int period);
 std::vector<double> adx_series(const std::vector<Bar>& bars, int period);
 // Session VWAP: stocks reset per ET trading date; crypto per UTC date.
 std::vector<double> vwap_series(const std::vector<Bar>& bars, AssetClass ac);
+// Timeframe-aware: intraday => session VWAP; daily or longer => rolling 20-bar VWAP.
+std::vector<double> vwap_series(const std::vector<Bar>& bars, AssetClass ac, int64_t tf_sec);
 // Highest high / lowest low of the previous `period` bars (excludes current).
 std::vector<double> prior_high_series(const std::vector<Bar>& bars, int period);
 std::vector<double> prior_low_series(const std::vector<Bar>& bars, int period);

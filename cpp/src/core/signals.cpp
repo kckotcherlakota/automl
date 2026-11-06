@@ -13,7 +13,7 @@ Context build_context(const std::vector<Bar>& bars, AssetClass ac, int64_t tf) {
   c.ema9 = ema_series(bars, 9); c.ema20 = ema_series(bars, 20); c.ema21 = ema_series(bars, 21);
   c.ema50 = ema_series(bars, 50); c.ema200 = ema_series(bars, 200);
   c.rsi = rsi_series(bars, 14); c.atr = atr_series(bars, 14); c.adx = adx_series(bars, 14);
-  c.vwap = vwap_series(bars, ac); c.relvol = relvol_series(bars, 20);
+  c.vwap = vwap_series(bars, ac, tf); c.relvol = relvol_series(bars, 20);
   c.ph20 = prior_high_series(bars, 20); c.pl10 = prior_low_series(bars, 10);
   c.bbw = bb_width_series(bars, 20);
   c.atr_pct.resize(bars.size());
@@ -130,7 +130,7 @@ Signal evaluate(const std::string& id, const Context& c, size_t i, const Strateg
     return e.s;
   }
 
-  if (c.ac == AssetClass::Stock) {
+  if (c.ac == AssetClass::Stock && c.tf < 86400) {  // intraday session rules only
     const int m = et_minute_of_day(b.t);
     const int wd = et_weekday(b.t);
     e.check(wd >= 1 && wd <= 5 && m >= 570 && m + c.tf / 60 <= 960, "regular trading session");

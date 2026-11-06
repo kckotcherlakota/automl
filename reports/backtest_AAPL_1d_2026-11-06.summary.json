@@ -1,11 +1,57 @@
 {
-  "symbol": "BTC-USD",
-  "timeframe": "15m",
-  "bars": 17280,
-  "report": "reports/backtest_BTC-USD_15m_2026-11-06.json",
+  "symbol": "AAPL",
+  "timeframe": "1d",
+  "bars": 1255,
+  "report": "reports/backtest_AAPL_1d_2026-11-06.json",
   "strategies": [
     {
+      "strategy": "A_ORB",
+      "trades": 0,
+      "net_pnl": 0.0,
+      "win_rate": 0.0,
+      "profit_factor": null,
+      "max_dd": 0.0,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "B_TREND",
+      "trades": 6,
+      "net_pnl": 126.31,
+      "win_rate": 0.667,
+      "profit_factor": 3.4971995501671937,
+      "max_dd": 0.0086,
+      "oos_trades": 2,
+      "oos_expectancy": 11.1162,
+      "accepted": false,
+      "failures": [
+        "fewer than 30 trades (insufficient sample)"
+      ]
+    },
+    {
       "strategy": "COMBINED",
+      "trades": 11,
+      "net_pnl": 81.24,
+      "win_rate": 0.455,
+      "profit_factor": 1.634184064581128,
+      "max_dd": 0.0116,
+      "oos_trades": 4,
+      "oos_expectancy": -1.8034,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "fewer than 30 trades (insufficient sample)"
+      ]
+    },
+    {
+      "strategy": "C_MOMENTUM",
       "trades": 0,
       "net_pnl": 0.0,
       "win_rate": 0.0,
@@ -22,48 +68,14 @@
       ]
     },
     {
-      "strategy": "E_CRYPTO_TREND",
-      "trades": 0,
-      "net_pnl": 0.0,
-      "win_rate": 0.0,
-      "profit_factor": null,
-      "max_dd": 0.0,
-      "oos_trades": 0,
-      "oos_expectancy": 0.0,
-      "accepted": false,
-      "failures": [
-        "out-of-sample expectancy not positive after costs",
-        "profit factor <= 1.20",
-        "fewer than 30 trades (insufficient sample)",
-        "unstable across rolling windows"
-      ]
-    },
-    {
-      "strategy": "F_CRYPTO_PULLBACK",
-      "trades": 0,
-      "net_pnl": 0.0,
-      "win_rate": 0.0,
-      "profit_factor": null,
-      "max_dd": 0.0,
-      "oos_trades": 0,
-      "oos_expectancy": 0.0,
-      "accepted": false,
-      "failures": [
-        "out-of-sample expectancy not positive after costs",
-        "profit factor <= 1.20",
-        "fewer than 30 trades (insufficient sample)",
-        "unstable across rolling windows"
-      ]
-    },
-    {
-      "strategy": "G_CRYPTO_VOLBRK",
-      "trades": 0,
-      "net_pnl": 0.0,
-      "win_rate": 0.0,
-      "profit_factor": null,
-      "max_dd": 0.0,
-      "oos_trades": 0,
-      "oos_expectancy": 0.0,
+      "strategy": "D_VWAP_MR",
+      "trades": 5,
+      "net_pnl": -44.51,
+      "win_rate": 0.2,
+      "profit_factor": 0.4246198199221242,
+      "max_dd": 0.0048,
+      "oos_trades": 2,
+      "oos_expectancy": -14.6902,
       "accepted": false,
       "failures": [
         "out-of-sample expectancy not positive after costs",

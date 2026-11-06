@@ -35,7 +35,7 @@ DATA = ROOT / "data"
 REPORTS = ROOT / "reports"
 DB = STATE / "journal.db"
 ET = ZoneInfo("America/New_York")
-UA = "claude-trading-agent/1.0"
+UA = "Mozilla/5.0 (compatible; claude-trading-agent/1.0)"
 TF_SEC = {"1m": 60, "5m": 300, "15m": 900, "1h": 3600, "1d": 86400}
 
 
@@ -170,6 +170,27 @@ def cmd_fetch_crypto(a):
         write_json(p, {"symbol": sym, "asset_class": "crypto", "timeframe": a.tf, "source": "coinbase_public",
                        "fetched_at": end, "bars": bars})
         print(json.dumps({"symbol": sym, "bars": len(bars), "file": str(p.relative_to(ROOT))}))
+
+
+def cmd_fetch_stocks(a):
+    """Daily stock/ETF bars (split-adjusted) from Yahoo's public chart API, for research backtests."""
+    for sym in a.symbols:
+        j = http_json(f"https://query1.finance.yahoo.com/v8/finance/chart/{sym}?range={a.range}&interval=1d")
+        r = j["chart"]["result"][0]
+        q = r["indicators"]["quote"][0]
+        bars = []
+        for i, t in enumerate(r["timestamp"]):
+            o, h, l, c, v = (q[k][i] for k in ("open", "high", "low", "close", "volume"))
+            if None in (o, h, l, c, v) or min(o, h, l, c) <= 0:
+                continue  # skip missing rows; never invent prices
+            h, l = max(h, o, c), min(l, o, c)
+            bars.append({"t": int(t) - int(t) % 86400, "o": o, "h": h, "l": l, "c": c, "v": float(v)})
+        bars = [b for k, b in enumerate(bars) if k == 0 or b["t"] > bars[k - 1]["t"]]
+        p = DATA / "stocks" / f"{sym}_1d.json"
+        write_json(p, {"symbol": sym, "asset_class": "stock", "timeframe": "1d", "source": "yahoo_chart_public",
+                       "fetched_at": int(time.time()), "bars": bars})
+        print(json.dumps({"symbol": sym, "bars": len(bars), "file": str(p.relative_to(ROOT))}))
+        time.sleep(0.5)
 
 
 def cmd_ingest_mcp_bars(a):
@@ -598,6 +619,8 @@ def main():
     sp = ap.add_subparsers(dest="cmd", required=True)
     p = sp.add_parser("fetch-crypto"); p.add_argument("--symbols", nargs="+", default=["BTC-USD", "ETH-USD"])
     p.add_argument("--tf", default="15m"); p.add_argument("--days", type=int, default=120); p.set_defaults(f=cmd_fetch_crypto)
+    p = sp.add_parser("fetch-stocks"); p.add_argument("--symbols", nargs="+", default=["SPY", "QQQ", "AAPL", "NVDA", "AMD", "MSFT", "TSLA", "AMZN"])
+    p.add_argument("--range", default="5y"); p.set_defaults(f=cmd_fetch_stocks)
     p = sp.add_parser("ingest-mcp-bars"); p.add_argument("file"); p.add_argument("--tf", default="5m"); p.set_defaults(f=cmd_ingest_mcp_bars)
     p = sp.add_parser("backtest"); p.add_argument("file"); p.add_argument("--asset", default="crypto"); p.add_argument("--tf", default="15m")
     p.add_argument("--equity", type=float, default=10000); p.add_argument("--folds", type=int, default=4)

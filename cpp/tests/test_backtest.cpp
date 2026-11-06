@@ -58,3 +58,21 @@ TEST(Backtest, ConfigValidation) {
   EXPECT_THROW(parse_backtest_config(json{{"risk_per_trade", 0.5}}), ValidationError);
   EXPECT_THROW(parse_backtest_config(json{{"slippage_bps", -1}}), ValidationError);
 }
+
+TEST(Backtest, DailyStockPositionsHoldAcrossBars) {
+  // Flat history, then a breakout bar with heavy volume, then a slow grind higher.
+  std::vector<Bar> bars;
+  const int64_t t0 = tt::kNov4 - 400LL * 86400;
+  for (int i = 0; i < 300; ++i) {
+    double px = 100 + (i % 2 ? 0.3 : -0.3) + i * 0.01;
+    bars.push_back({t0 + i * 86400LL, px, px + 0.8, px - 0.8, px, 1e6});
+  }
+  for (int i = 300; i < 340; ++i) {
+    double px = 104 + (i - 300) * 0.4;
+    bars.push_back({t0 + i * 86400LL, px - 0.2, px + 0.5, px - 0.5, px, i == 300 ? 3e6 : 1.2e6});
+  }
+  Context c = build_context(bars, AssetClass::Stock, 86400);
+  BacktestConfig cfg; cfg.max_hold_bars = 20;
+  auto r = run_backtest(c, cfg, 250, bars.size());
+  for (const auto& t : r.trades) EXPECT_NE(t.exit_reason, "session_close");
+}

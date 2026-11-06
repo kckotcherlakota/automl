@@ -1,0 +1,68 @@
+{
+  "symbol": "SOL-USD",
+  "timeframe": "1d",
+  "bars": 1825,
+  "report": "reports/backtest_SOL-USD_1d_2026-11-06.json",
+  "strategies": [
+    {
+      "strategy": "COMBINED",
+      "trades": 10,
+      "net_pnl": 123.2,
+      "win_rate": 0.5,
+      "profit_factor": 1.9840846762306223,
+      "max_dd": 0.0083,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "fewer than 30 trades (insufficient sample)"
+      ]
+    },
+    {
+      "strategy": "E_CRYPTO_TREND",
+      "trades": 6,
+      "net_pnl": 73.75,
+      "win_rate": 0.5,
+      "profit_factor": 1.9809440059074528,
+      "max_dd": 0.005,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "fewer than 30 trades (insufficient sample)"
+      ]
+    },
+    {
+      "strategy": "F_CRYPTO_PULLBACK",
+      "trades": 6,
+      "net_pnl": 73.77,
+      "win_rate": 0.5,
+      "profit_factor": 1.9845684718869356,
+      "max_dd": 0.0045,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "fewer than 30 trades (insufficient sample)"
+      ]
+    },
+    {
+      "strategy": "G_CRYPTO_VOLBRK",
+      "trades": 2,
+      "net_pnl": 99.19,
+      "win_rate": 1.0,
+      "profit_factor": "inf",
+      "max_dd": 0.0017,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "fewer than 30 trades (insufficient sample)"
+      ]
+    }
+  ]
+}

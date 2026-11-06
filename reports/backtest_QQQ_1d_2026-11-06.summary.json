@@ -1,0 +1,87 @@
+{
+  "symbol": "QQQ",
+  "timeframe": "1d",
+  "bars": 1255,
+  "report": "reports/backtest_QQQ_1d_2026-11-06.json",
+  "strategies": [
+    {
+      "strategy": "A_ORB",
+      "trades": 0,
+      "net_pnl": 0.0,
+      "win_rate": 0.0,
+      "profit_factor": null,
+      "max_dd": 0.0,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "B_TREND",
+      "trades": 6,
+      "net_pnl": 127.96,
+      "win_rate": 0.667,
+      "profit_factor": 3.522808073632266,
+      "max_dd": 0.0034,
+      "oos_trades": 1,
+      "oos_expectancy": -25.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "fewer than 30 trades (insufficient sample)"
+      ]
+    },
+    {
+      "strategy": "COMBINED",
+      "trades": 9,
+      "net_pnl": 182.31,
+      "win_rate": 0.667,
+      "profit_factor": 3.7358397005478263,
+      "max_dd": 0.0034,
+      "oos_trades": 1,
+      "oos_expectancy": -25.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "fewer than 30 trades (insufficient sample)"
+      ]
+    },
+    {
+      "strategy": "C_MOMENTUM",
+      "trades": 0,
+      "net_pnl": 0.0,
+      "win_rate": 0.0,
+      "profit_factor": null,
+      "max_dd": 0.0,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "D_VWAP_MR",
+      "trades": 3,
+      "net_pnl": 53.67,
+      "win_rate": 0.667,
+      "profit_factor": 4.430104236108239,
+      "max_dd": 0.0024,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "fewer than 30 trades (insufficient sample)"
+      ]
+    }
+  ]
+}

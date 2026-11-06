@@ -136,6 +136,22 @@ std::vector<double> vwap_series(const std::vector<Bar>& bars, AssetClass ac) {
   }
   return out;
 }
+std::vector<double> vwap_series(const std::vector<Bar>& bars, AssetClass ac, int64_t tf_sec) {
+  if (tf_sec < 86400) return vwap_series(bars, ac);
+  const size_t n = 20;
+  std::vector<double> out(bars.size(), kNaN);
+  double pv = 0, vol = 0;
+  for (size_t i = 0; i < bars.size(); ++i) {
+    const double tp = (bars[i].h + bars[i].l + bars[i].c) / 3.0;
+    pv += tp * bars[i].v; vol += bars[i].v;
+    if (i >= n) {
+      const double tq = (bars[i - n].h + bars[i - n].l + bars[i - n].c) / 3.0;
+      pv -= tq * bars[i - n].v; vol -= bars[i - n].v;
+    }
+    if (i + 1 >= n) out[i] = vol > 0 ? pv / vol : tp;
+  }
+  return out;
+}
 std::vector<double> prior_high_series(const std::vector<Bar>& bars, int period) {
   RollingExtreme r(period, true); std::vector<double> out; out.reserve(bars.size());
   for (const auto& b : bars) out.push_back(r.prior_then_push(b.h));

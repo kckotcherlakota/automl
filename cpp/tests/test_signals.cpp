@@ -65,3 +65,20 @@ TEST(Signals, RegimeInsufficientData) {
   EXPECT_EQ(classify_regime(c, 5).label, "INSUFFICIENT_DATA");
   EXPECT_EQ(classify_regime(c, 150).label, "RANGE");
 }
+
+TEST(Signals, DailyStockBarsSkipIntradaySessionChecks) {
+  std::vector<Bar> bars;
+  double px = 100;
+  for (int i = 0; i < 260; ++i) {  // steady uptrend, daily bars stamped at 00:00 UTC
+    px *= 1.002;
+    bars.push_back({tt::kNov4 - (260 - i) * 86400LL, px * 0.999, px * 1.01, px * 0.99, px, 1e6});
+  }
+  Context c = build_context(bars, AssetClass::Stock, 86400);
+  Signal s = evaluate("B_TREND", c, bars.size() - 1, StrategyParams{});
+  for (const auto& f : s.failed) {
+    EXPECT_NE(f, "regular trading session");
+    EXPECT_NE(f, "before last entry time");
+  }
+  EXPECT_FALSE(std::isnan(c.vwap.back()));
+  EXPECT_LT(c.vwap.back(), bars.back().c);  // rolling VWAP lags a rising price
+}

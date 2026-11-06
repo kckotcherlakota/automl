@@ -1,0 +1,91 @@
+{
+  "symbol": "TSLA",
+  "timeframe": "1d",
+  "bars": 1255,
+  "report": "reports/backtest_TSLA_1d_2026-11-06.json",
+  "strategies": [
+    {
+      "strategy": "A_ORB",
+      "trades": 0,
+      "net_pnl": 0.0,
+      "win_rate": 0.0,
+      "profit_factor": null,
+      "max_dd": 0.0,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "B_TREND",
+      "trades": 6,
+      "net_pnl": -84.83,
+      "win_rate": 0.167,
+      "profit_factor": 0.3580759282717394,
+      "max_dd": 0.0133,
+      "oos_trades": 1,
+      "oos_expectancy": -25.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "COMBINED",
+      "trades": 9,
+      "net_pnl": -94.7,
+      "win_rate": 0.222,
+      "profit_factor": 0.4562628649092628,
+      "max_dd": 0.0158,
+      "oos_trades": 2,
+      "oos_expectancy": 3.7806,
+      "accepted": false,
+      "failures": [
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "C_MOMENTUM",
+      "trades": 0,
+      "net_pnl": 0.0,
+      "win_rate": 0.0,
+      "profit_factor": null,
+      "max_dd": 0.0,
+      "oos_trades": 0,
+      "oos_expectancy": 0.0,
+      "accepted": false,
+      "failures": [
+        "out-of-sample expectancy not positive after costs",
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    },
+    {
+      "strategy": "D_VWAP_MR",
+      "trades": 3,
+      "net_pnl": -9.96,
+      "win_rate": 0.333,
+      "profit_factor": 0.7655179416102205,
+      "max_dd": 0.0042,
+      "oos_trades": 1,
+      "oos_expectancy": 32.6428,
+      "accepted": false,
+      "failures": [
+        "profit factor <= 1.20",
+        "fewer than 30 trades (insufficient sample)",
+        "unstable across rolling windows"
+      ]
+    }
+  ]
+}
