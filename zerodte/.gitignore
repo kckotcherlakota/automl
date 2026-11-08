@@ -1,7 +1,0 @@
-data/_part_*.parquet
-results/fast_trades.csv
-results/bars_5m.csv
-results/parity_*
-results/configs.txt
-cpp/fastsim
-__pycache__/
