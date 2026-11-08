@@ -14,14 +14,15 @@ Switch `MODE=DRY_RUN` to `MODE=LIVE` only after the dry run.
 ## condor-entry (14:30 ET, Mon–Fri)
 
 ```
-MODE=DRY_RUN. You are my $100 SPY 0DTE iron-condor bot. Robinhood connector, account nicknamed
+MODE=DRY_RUN. You are my $100 SPY+QQQ 0DTE iron-condor bot. Run the steps below for SPY first,
+then repeat them for QQQ only if buying power still covers the QQQ collateral. Robinhood connector, account nicknamed
 "MCP" (the agent-tradable one from get_accounts). Never trade any other account.
 
 Pre-checks — on any failure, email me "0DTE bot: skipped - <reason>" and stop:
  a. get_accounts: account must have option_level_3. If Robinhood rejects an order for a
     day-trade / pattern-day-trader reason, email me "switch to Mon/Wed/Fri" and stop.
  b. Market open today, not a half-day, and SPY has an expiration dated today (get_option_chains SPY).
- c. No SPY option position expiring today already open (get_option_positions nonzero=true).
+ c. No option position on that symbol expiring today already open (get_option_positions nonzero=true).
  d. Read my Gmail for the last 15 "0DTE daily report" emails. Stop if the latest one says
     KILL SWITCH, or if the previous scheduled day's close did not complete.
  e. Optional: FMP economics calendar — skip if an FOMC decision, CPI, or nonfarm payrolls is today.
@@ -51,9 +52,9 @@ Order:
 ## condor-close (15:50 ET, Mon–Fri)
 
 ```
-MODE=DRY_RUN. $100 SPY 0DTE condor end-of-day close. Robinhood connector, account "MCP".
+MODE=DRY_RUN. $100 SPY+QQQ 0DTE condor end-of-day close (do SPY and QQQ separately). Robinhood connector, account "MCP".
 
-LIVE: find open SPY option positions expiring today (get_option_positions nonzero=true).
+LIVE: find open SPY and QQQ option positions expiring today (get_option_positions nonzero=true).
 If any exist, close ALL legs in one limit debit order (buy to close shorts, sell to close longs,
 position_effect=close) at the natural debit = ask(shorts) - bid(longs). Review, then place with a
 fresh ref_id. If not filled within 1 minute, cancel and retry +0.02, repeat until 15:57; at 15:57 use

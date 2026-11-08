@@ -1,10 +1,22 @@
 # $100 0DTE bot — SPY iron condor ($1 wings), step by step
 
-**One strategy only.** It is the only setup that held up for a $100 account in the backtest
-(`../REPORT.md`, `../results/final100.csv`):
+**One strategy, on SPY and then QQQ.** It is the only setup that held up for a $100 account in
+the backtest (`../REPORT.md`, `../results/final100.csv`):
 
 > **SPY 0DTE iron condor**: short call and short put at **0.30 delta**, long wings **$1** further
 > out-of-the-money. Opened at **14:30 ET**, closed at **15:50 ET**, **no stop**, 1 contract.
+> After SPY, the bot opens the **same condor on QQQ** if buying power still covers its collateral
+> (both together need about $130).
+
+Extra condors earlier in the day were tested and **hurt**:
+
+| entry–exit | avg/trade |
+|---|---|
+| 10:00–12:00 | −$8.08 |
+| 12:00–14:25 | −$0.55 |
+| 11:00–14:25 | −$0.08 |
+
+The edge is in the final 90 minutes, so the bot trades only once per symbol per day.
 
 The bot trades **every weekday**. FINRA replaced the pattern-day-trader rule (the $25k minimum
 and the 3-day-trades-per-5-days limit) with intraday margin standards, effective
@@ -17,7 +29,8 @@ Mon/Wed/Fri schedule in the table below until it doesn't.
 
 | plan | trades | win % | avg/trade | worst | avg week | $100 → end of year (Y1 / Y2 / Y3 / Y4) |
 |---|---|---|---|---|---|---|
-| **every weekday, close 15:50 (this bot)** | 994 | 75% | **+$9.53** | −$89 | **+$45.3** | $2,003 / **busted** / $2,922 / $2,864 |
+| **SPY + QQQ every weekday, 14:30–15:50 (this bot)** | 1,988 | 74% | +$9.53 SPY / +$7.48 QQQ | −$89 | **+$80.9** | **$3,656 / $2,070 / $4,959 / $4,784** |
+| SPY only, every weekday, close 15:50 | 994 | 75% | **+$9.53** | −$89 | **+$45.3** | $2,003 / **busted** / $2,922 / $2,864 |
 | Mon/Wed/Fri only, close 15:50 (fallback if your broker still limits day trades) | 589 | 75% | +$9.81 | −$78 | +$27.7 | $1,113 / busted / $1,927 / $2,059 |
 | every day, hold to expiry (no day trade) | 994 | 71% | +$10.74 | −$89 | +$51.1 | not recommended: SPY assignment risk |
 
