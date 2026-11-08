@@ -108,7 +108,7 @@ Four routines, all Mon–Fri New York time unless noted:
 | `0DTE condor entry (LIVE)` | `CRON_TZ=America/New_York 30 14 * * 1-5` |
 | `0DTE condor close (LIVE)` | `CRON_TZ=America/New_York 50 15 * * 1-5` |
 | `0DTE weekly review` | `CRON_TZ=America/New_York 17 16 * * 5` (Fridays) |
-| `0DTE daily session clear` (prompt: `/clear`) | `CRON_TZ=America/New_York 13 17 * * 1-5` |
+| `0DTE daily session clear` (prompt: `/clear`) — **disabled**: a routine-sent `/clear` does not clear the session | `CRON_TZ=America/New_York 13 17 * * 1-5` |
 
 The entry and close routines run the prompts above **followed by** the notes protocol below.
 
