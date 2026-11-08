@@ -11,7 +11,7 @@ Monday–Friday:
 - **Day-trade fallback:** if your broker still enforces a day-trade limit, use `1,3,5` instead of `1-5`.
 - **Connectors:** the session that runs them needs the **Robinhood** and **Gmail** connectors.
   **FMP** is optional.
-- **Before creating them:** replace `<YOUR_EMAIL>` in both prompts.
+- **Email:** reports go to `kckota9@gmail.com` (already filled in both prompts).
 - **Going live:** change `MODE=DRY_RUN` to `MODE=LIVE` only after the 2–3 week dry run (see
   README).
 
@@ -25,7 +25,7 @@ If MODE=DRY_RUN you must NOT call review_option_order, place_option_order or any
 read-only Robinhood calls and email only.
 
 Account: the Robinhood account nicknamed "MCP" (the one get_accounts marks as tradable by you).
-Never use any other account. Email every report to <YOUR_EMAIL> with the Gmail connector.
+Never use any other account. Email every report to kckota9@gmail.com with the Gmail connector.
 
 Pre-checks — on any failure, email "0DTE bot: skipped - <reason>" and stop:
  a. get_accounts: the MCP account must have option_level_3.
@@ -63,7 +63,7 @@ The 15:50 close routine reads this JSON.
 ```
 MODE=DRY_RUN. $100 SPY+QQQ 0DTE condor end-of-day close (15:50 America/New_York).
 If MODE=DRY_RUN you must NOT call review_option_order, place_option_order or any order/cancel tool.
-Account: Robinhood "MCP" only. Email reports to <YOUR_EMAIL> with the Gmail connector.
+Account: Robinhood "MCP" only. Email reports to kckota9@gmail.com with the Gmail connector.
 
 LIVE: find open SPY and QQQ option positions expiring today (get_option_positions nonzero=true).
 For each symbol close ALL legs in one 4-leg limit DEBIT order (buy to close shorts, sell to close
