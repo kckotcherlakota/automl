@@ -1,22 +1,25 @@
 # $100 bot — routine prompts (paste-ready, self-contained)
 
-Schedule both routines in America/New_York, Monday/Wednesday/Friday:
-- entry: `CRON_TZ=America/New_York 30 14 * * 1,3,5`
-- close: `CRON_TZ=America/New_York 50 15 * * 1,3,5`
+Schedule both routines in America/New_York, Monday–Friday:
+- entry: `CRON_TZ=America/New_York 30 14 * * 1-5`
+- close: `CRON_TZ=America/New_York 50 15 * * 1-5`
+
+Fallback if your broker still enforces a day-trade limit: use `1,3,5` instead of `1-5`.
 
 Each runs in a fresh session with the Robinhood connector (plus Gmail, optionally FMP).
 Switch `MODE=DRY_RUN` to `MODE=LIVE` only after the dry run.
 
 ---
 
-## condor-entry (14:30 ET, Mon/Wed/Fri)
+## condor-entry (14:30 ET, Mon–Fri)
 
 ```
 MODE=DRY_RUN. You are my $100 SPY 0DTE iron-condor bot. Robinhood connector, account nicknamed
 "MCP" (the agent-tradable one from get_accounts). Never trade any other account.
 
 Pre-checks — on any failure, email me "0DTE bot: skipped - <reason>" and stop:
- a. get_accounts: account must have option_level_3.
+ a. get_accounts: account must have option_level_3. If Robinhood rejects an order for a
+    day-trade / pattern-day-trader reason, email me "switch to Mon/Wed/Fri" and stop.
  b. Market open today, not a half-day, and SPY has an expiration dated today (get_option_chains SPY).
  c. No SPY option position expiring today already open (get_option_positions nonzero=true).
  d. Read my Gmail for the last 15 "0DTE daily report" emails. Stop if the latest one says
@@ -45,7 +48,7 @@ Order:
    Email me "0DTE entry LIVE <date>" with the filled credit, strikes, quantity, collateral.
 ```
 
-## condor-close (15:50 ET, Mon/Wed/Fri)
+## condor-close (15:50 ET, Mon–Fri)
 
 ```
 MODE=DRY_RUN. $100 SPY 0DTE condor end-of-day close. Robinhood connector, account "MCP".

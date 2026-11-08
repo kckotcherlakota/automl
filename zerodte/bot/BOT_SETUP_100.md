@@ -6,15 +6,19 @@
 > **SPY 0DTE iron condor**: short call and short put at **0.30 delta**, long wings **$1** further
 > out-of-the-money. Opened at **14:30 ET**, closed at **15:50 ET**, **no stop**, 1 contract.
 
-Robinhood's day-trade limit means the bot trades **Monday, Wednesday and Friday only**: 3 day
-trades per 5 business days, the limit for margin accounts under $25k.
+The bot trades **every weekday**. FINRA replaced the pattern-day-trader rule (the $25k minimum
+and the 3-day-trades-per-5-days limit) with intraday margin standards, effective
+**June 4, 2026** (Regulatory Notice 26-10). Brokers may phase this in until Oct 2027.
+
+**Fallback:** if Robinhood still shows a day-trade counter or limit on your account, use the
+Mon/Wed/Fri schedule in the table below until it doesn't.
 
 ## What to expect (994-day backtest, 1 contract, modelled option prices)
 
 | plan | trades | win % | avg/trade | worst | avg week | $100 → end of year (Y1 / Y2 / Y3 / Y4) |
 |---|---|---|---|---|---|---|
-| **Mon/Wed/Fri, close 15:50 (this bot)** | 589 | 75% | **+$9.81** | −$78 | **+$27.7** | $1,113 / **busted** / $1,927 / $2,059 |
-| every day, close 15:50 (needs no PDT limit) | 994 | 75% | +$9.53 | −$89 | +$45.3 | $2,003 / busted / $2,922 / $2,864 |
+| **every weekday, close 15:50 (this bot)** | 994 | 75% | **+$9.53** | −$89 | **+$45.3** | $2,003 / **busted** / $2,922 / $2,864 |
+| Mon/Wed/Fri only, close 15:50 (fallback if your broker still limits day trades) | 589 | 75% | +$9.81 | −$78 | +$27.7 | $1,113 / busted / $1,927 / $2,059 |
 | every day, hold to expiry (no day trade) | 994 | 71% | +$10.74 | −$89 | +$51.1 | not recommended: SPY assignment risk |
 
 Years: Y1 = Oct 2022–Sep 2023, Y2 = Oct 2023–Sep 2024, Y3 = Oct 2024–Sep 2025,
@@ -32,13 +36,12 @@ Y4 = Oct 2025–Sep 2026.
    losses and would have avoided the busted year.
 3. **Trade approvals ON** in the Robinhood app: Account → Investing → (agent) trade approvals.
    Each order then waits for your tap until you trust the bot.
-4. **Not flagged as a pattern day trader.** The bot never makes more than 3 day trades per 5
-   business days.
+4. **No day-trade limit on the account.** Check the Robinhood app for a day-trade counter. If
+   one is still shown, use the Mon/Wed/Fri fallback schedule.
 
 ## The rules the bot follows (exactly what was backtested)
-1. **Days:** Mon, Wed, Fri. Skip market holidays and half-days.
-   - If the condor can't be closed on a given day, the bot does not trade the next scheduled
-     day, so the day-trade count stays within limits.
+1. **Days:** every weekday (Mon–Fri). Skip market holidays and half-days.
+   - If the condor could not be closed on a given day, the bot does not trade the next day.
 2. **14:30 ET — pick strikes** on today's SPY expiry:
    - short call: delta closest to +0.30; long call: short call strike + $1;
    - short put: delta closest to −0.30; long put: short put strike − $1.
@@ -59,9 +62,9 @@ Y4 = Oct 2025–Sep 2026.
 7. **Optional, untested:** skip FOMC / CPI / jobs-report days using the FMP economic calendar.
 
 ## Setup steps
-1. **Dry run, 2–3 weeks (about 6–9 trading days).** Ask Claude:
+1. **Dry run, 2–3 weeks (about 10–15 trading days).** Ask Claude:
    *"Create my $100 0DTE condor routines from zerodte/bot/routine_prompts_100.md in DRY_RUN mode."*
-   - Claude creates 2 routines: entry at 14:30 and close at 15:50, Mon/Wed/Fri, New York time.
+   - Claude creates 2 routines: entry at 14:30 and close at 15:50, Mon–Fri, New York time.
    - Each needs the Robinhood connector (plus Gmail for the report, FMP for the event filter).
    - Each trading day you get an email showing the real credit vs the model's and the P&L it
      would have made.
