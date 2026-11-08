@@ -83,3 +83,117 @@ Email subject "0DTE daily report <YYYY-MM-DD>":
  - put "KILL SWITCH - bot stopped" at the TOP if: 3 losing days in a row, or equity < 50% of peak,
    or equity < $70 (can't fund one condor).
 ```
+
+---
+
+# Notes system (memory between days)
+
+All routines run inside one persistent Claude session (the org does not allow connectors on
+fresh-session routines), so the chat history grows and is compacted automatically. The bot
+does **not** rely on it: every run treats earlier chat as stale and works only from fresh
+Robinhood/Gmail data plus two files in this repo, on branch `claude/busy-davinci-8zond5`:
+
+| file | written | cleared |
+|---|---|---|
+| `notes/daily_notes.md` | morning prep, entry, close (each appends its section for today) | every Friday by the weekly review |
+| `notes/long_term_notes.md` | weekly review (summary, running totals, lessons) | never; kept short |
+
+Four routines, all Mon–Fri New York time unless noted:
+
+| routine | cron |
+|---|---|
+| `0DTE morning prep (DRY RUN)` | `CRON_TZ=America/New_York 7 9 * * 1-5` |
+| `0DTE condor entry (DRY RUN)` | `CRON_TZ=America/New_York 30 14 * * 1-5` |
+| `0DTE condor close (DRY RUN)` | `CRON_TZ=America/New_York 50 15 * * 1-5` |
+| `0DTE weekly review` | `CRON_TZ=America/New_York 17 16 * * 5` (Fridays) |
+
+The entry and close routines run the prompts above **followed by** the notes protocol below.
+
+## Notes protocol (appended to the entry and close prompts)
+
+```
+NOTES PROTOCOL (memory between days; do this as well as the steps above):
+- Earlier messages in this conversation are stale. Do not reuse any number, quote, strike or
+  conclusion from them. Your memory between runs is ONLY the two notes files plus fresh data.
+- START, before anything else: cd /home/user/automl (if missing: git clone
+  https://github.com/kckotcherlakota/automl /home/user/automl). Then
+  git fetch origin claude/busy-davinci-8zond5 && git checkout claude/busy-davinci-8zond5 &&
+  git pull --ff-only origin claude/busy-davinci-8zond5.
+  Read notes/long_term_notes.md and notes/daily_notes.md in full. Follow today's morning-prep
+  plan if there is one; if it is missing, do the morning-prep checks yourself first.
+- END, after the email is sent: append this step's section under today's "## YYYY-MM-DD (Day)"
+  heading in notes/daily_notes.md (create the heading if missing), following the format at the
+  top of that file. Entry step: "### Entry (14:30 ET)". Close step: "### Close (15:50 ET)" and
+  then "### Learnings" (real vs model credit, anything unexpected, tool/data problems; mark
+  untested ideas as untested). Keep each section under ~15 lines.
+  Then: git add notes && git commit -m "notes: <YYYY-MM-DD> <entry|close>" with the trailer
+  lines "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" and
+  "Claude-Session: https://claude.ai/code/session_012ZPnNbEARMTpMMQ1Weeq33";
+  git push -u origin claude/busy-davinci-8zond5 (on a network error retry up to 4 times,
+  waiting 2s, 4s, 8s, 16s). If the push still fails, say so in the email.
+- Never write account numbers in full, secrets or tokens into the notes.
+```
+
+## 0DTE morning prep (09:07 ET, Mon–Fri)
+
+```
+MODE=DRY_RUN. $100 SPY+QQQ 0DTE condor bot, MORNING PREP (09:07 America/New_York). Read-only:
+do NOT call review_option_order, place_option_order or any order/cancel tool.
+Account: Robinhood "MCP" only. Email to kckota9@gmail.com with the Gmail connector ONLY if
+something needs my attention (see below); otherwise no email.
+
+Earlier messages in this conversation are stale; do not reuse anything from them.
+1. cd /home/user/automl (if missing: git clone https://github.com/kckotcherlakota/automl
+   /home/user/automl); git fetch origin claude/busy-davinci-8zond5 && git checkout
+   claude/busy-davinci-8zond5 && git pull --ff-only origin claude/busy-davinci-8zond5.
+   Read notes/long_term_notes.md and notes/daily_notes.md in full.
+2. Checks (read-only):
+   a. get_accounts: MCP still has option_level_3.
+   b. Market open today and not a half-day; SPY expiration dated today (get_option_chains SPY);
+      same for QQQ.
+   c. get_portfolio: buying power and account value. Can it fund SPY (~$61) and QQQ (~$70)?
+   d. get_option_positions nonzero=true: any open option positions (there should be none).
+   e. Gmail: latest "0DTE daily report" - KILL SWITCH present? Did yesterday's close run
+      (a daily report exists for the last trading day)?
+   f. Optional: FMP economics calendar - FOMC decision, CPI or nonfarm payrolls today?
+   g. get_trade_approval_setting for MCP (record on/off; must be ON before LIVE).
+3. Append "## YYYY-MM-DD (Day)" and "### Morning prep (~09:00 ET)" to notes/daily_notes.md:
+   the results above plus a short plan for 14:30 (which symbols to price, event-day flag,
+   anything from long-term or daily notes to watch). Keep it under ~12 lines.
+4. Commit "notes: <YYYY-MM-DD> morning prep" with trailer lines
+   "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" and
+   "Claude-Session: https://claude.ai/code/session_012ZPnNbEARMTpMMQ1Weeq33", then
+   git push -u origin claude/busy-davinci-8zond5 (retry up to 4 times: 2s, 4s, 8s, 16s).
+5. Email "0DTE morning prep: ATTENTION <YYYY-MM-DD>" only if: market closed/half-day,
+   KILL SWITCH, yesterday's close missing, open positions found, buying power < $70, options
+   level changed, or the notes push failed. Never write full account numbers or secrets.
+```
+
+## 0DTE weekly review (16:17 ET, Fridays)
+
+```
+$100 SPY+QQQ 0DTE condor bot, WEEKLY REVIEW (Friday 16:17 America/New_York). Read-only on
+Robinhood: do NOT call review_option_order, place_option_order or any order/cancel tool.
+Earlier messages in this conversation are stale; do not reuse anything from them.
+1. cd /home/user/automl (clone https://github.com/kckotcherlakota/automl there if missing);
+   git fetch origin claude/busy-davinci-8zond5 && git checkout claude/busy-davinci-8zond5 &&
+   git pull --ff-only origin claude/busy-davinci-8zond5. Read both notes files in full.
+   Cross-check numbers against this week's "0DTE daily report" emails in Gmail.
+2. Update notes/long_term_notes.md:
+   - add one row to "Running totals" for this week (trades, wins, win %, week P&L mid and
+     natural, cumulative natural P&L, peak, drawdown);
+   - update "Real vs model credit" with this week's average real mid/natural credit vs the
+     model's $0.35-0.45 and the % gap;
+   - add at most 5 new bullets to "Lessons" (newest first); merge or delete lessons that are
+     now duplicated or proven wrong; keep the whole file under ~150 lines;
+   - update "Open questions"; after 10-15 dry-run trading days, add a go/no-go line using the
+     README rule (credits within ~15% of model, paper P&L not clearly negative).
+3. Reset notes/daily_notes.md to just its header and format block (everything above the
+   first "---" line plus that line), deleting the week's day entries.
+4. Commit "notes: weekly review week ending <YYYY-MM-DD>" with trailer lines
+   "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" and
+   "Claude-Session: https://claude.ai/code/session_012ZPnNbEARMTpMMQ1Weeq33"; git push -u origin
+   claude/busy-davinci-8zond5 (retry up to 4 times: 2s, 4s, 8s, 16s).
+5. Email kckota9@gmail.com (Gmail connector) "0DTE weekly review <YYYY-MM-DD>": the week's row,
+   cumulative totals, real-vs-model credit, new lessons, and go/no-go status if due.
+```
