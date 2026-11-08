@@ -1,0 +1,39 @@
+days: 994  2022-10-03 -> 2026-09-28
+rules_as_given|SPY {"trades": 292, "win_rate": 0.264, "avg_win": 908.1, "avg_loss": -431.2, "expectancy_$": -78.03, "expectancy_R": -0.156, "profit_factor": 0.75, "total_pnl": -22783.0, "return_pct": -22.8, "max_dd_pct": -24.2, "sharpe": -1.13}
+rules_as_given|QQQ {"trades": 396, "win_rate": 0.28, "avg_win": 908.6, "avg_loss": -454.1, "expectancy_$": -72.16, "expectancy_R": -0.144, "profit_factor": 0.78, "total_pnl": -28574.0, "return_pct": -28.6, "max_dd_pct": -33.5, "sharpe": -1.19}
+random_dir_seed0|SPY+QQQ {"trades": 648, "win_rate": 0.353, "avg_win": 535.6, "avg_loss": -362.7, "expectancy_$": -45.28, "expectancy_R": -0.091, "profit_factor": 0.81, "total_pnl": -29338.0, "return_pct": -29.3, "max_dd_pct": -33.2, "sharpe": -1.14}
+rules_as_given|SPY+QQQ {"trades": 640, "win_rate": 0.28, "avg_win": 908.5, "avg_loss": -443.1, "expectancy_$": -65.09, "expectancy_R": -0.13, "profit_factor": 0.8, "total_pnl": -41656.0, "return_pct": -41.7, "max_dd_pct": -45.7, "sharpe": -1.29}
+random_dir_seed2|SPY+QQQ {"trades": 648, "win_rate": 0.34, "avg_win": 529.2, "avg_loss": -366.3, "expectancy_$": -62.28, "expectancy_R": -0.125, "profit_factor": 0.74, "total_pnl": -40355.0, "return_pct": -40.4, "max_dd_pct": -44.1, "sharpe": -1.6}
+random_dir_seed1|SPY+QQQ {"trades": 653, "win_rate": 0.332, "avg_win": 504.5, "avg_loss": -368.5, "expectancy_$": -78.38, "expectancy_R": -0.157, "profit_factor": 0.68, "total_pnl": -51179.0, "return_pct": -51.2, "max_dd_pct": -53.8, "sharpe": -2.05}
+random_dir_seed3|SPY+QQQ {"trades": 648, "win_rate": 0.316, "avg_win": 528.5, "avg_loss": -361.0, "expectancy_$": -79.57, "expectancy_R": -0.159, "profit_factor": 0.68, "total_pnl": -51560.0, "return_pct": -51.6, "max_dd_pct": -53.9, "sharpe": -2.02}
+random_dir_seed4|SPY+QQQ {"trades": 645, "win_rate": 0.35, "avg_win": 543.9, "avg_loss": -374.9, "expectancy_$": -52.99, "expectancy_R": -0.106, "profit_factor": 0.78, "total_pnl": -34181.0, "return_pct": -34.2, "max_dd_pct": -36.3, "sharpe": -1.36}
+no_retest|SPY+QQQ {"trades": 1365, "win_rate": 0.281, "avg_win": 905.5, "avg_loss": -453.7, "expectancy_$": -71.33, "expectancy_R": -0.143, "profit_factor": 0.78, "total_pnl": -97364.0, "return_pct": -97.4, "max_dd_pct": -107.4, "sharpe": -1.96}
+no_volume|SPY+QQQ {"trades": 1342, "win_rate": 0.283, "avg_win": 903.7, "avg_loss": -433.4, "expectancy_$": -54.8, "expectancy_R": -0.11, "profit_factor": 0.82, "total_pnl": -73548.0, "return_pct": -73.5, "max_dd_pct": -79.0, "sharpe": -1.49}
+no_vwap|SPY+QQQ {"trades": 662, "win_rate": 0.276, "avg_win": 899.8, "avg_loss": -436.6, "expectancy_$": -67.19, "expectancy_R": -0.134, "profit_factor": 0.79, "total_pnl": -44478.0, "return_pct": -44.5, "max_dd_pct": -48.6, "sharpe": -1.38}
+no_ema|SPY+QQQ {"trades": 874, "win_rate": 0.283, "avg_win": 907.7, "avg_loss": -440.6, "expectancy_$": -59.55, "expectancy_R": -0.119, "profit_factor": 0.81, "total_pnl": -52046.0, "return_pct": -52.0, "max_dd_pct": -60.2, "sharpe": -1.35}
+no_tech_exit|SPY+QQQ {"trades": 636, "win_rate": 0.299, "avg_win": 904.7, "avg_loss": -477.9, "expectancy_$": -64.85, "expectancy_R": -0.13, "profit_factor": 0.81, "total_pnl": -41244.0, "return_pct": -41.2, "max_dd_pct": -46.0, "sharpe": -1.22}
+  grid progress 20/157
+  grid progress 40/157
+  grid progress 60/157
+  grid progress 80/157
+  grid progress 100/157
+  grid progress 120/157
+  grid progress 140/157
+{
+  "n_days": 994,
+  "first_day": "2022-10-03",
+  "last_day": "2026-09-28",
+  "split_day": "2025-02-27",
+  "best_in_sample": "grid_t1.0_s0.5_d0.7_te0_w1130"
+}
+                                 run  IS_trades  IS_win_rate  IS_avg_win  IS_avg_loss  IS_expectancy_$  IS_expectancy_R  IS_profit_factor  IS_total_pnl  IS_return_pct  IS_max_dd_pct  IS_sharpe  OOS_trades  OOS_win_rate  OOS_avg_win  OOS_avg_loss  OOS_expectancy_$  OOS_expectancy_R  OOS_profit_factor  OOS_total_pnl  OOS_return_pct  OOS_max_dd_pct  OOS_sharpe
+142    grid_t1.0_s0.5_d0.7_te0_w1130        374        0.417       626.8       -405.2            25.27            0.051              1.11        9451.0            9.5          -10.8       0.51         235         0.391        568.5        -367.0             -0.75            -0.002               1.00         -177.0            -0.2           -10.3       -0.02
+127    grid_t1.0_s0.3_d0.7_te1_w1130        391        0.225      1091.3       -304.1             9.94            0.020              1.04        3886.0            3.9          -10.6       0.18         244         0.180       1138.1        -287.3            -30.28            -0.061               0.87        -7389.0            -7.4           -17.3       -0.56
+139    grid_t1.0_s0.5_d0.7_te1_w1130        390        0.233       641.4       -182.4             9.85            0.020              1.07        3842.0            3.8           -5.5       0.29         244         0.189        646.0        -161.2             -9.05            -0.018               0.93        -2209.0            -2.2            -9.9       -0.28
+106    grid_t0.6_s0.5_d0.7_te0_w1130        375        0.477       459.2       -407.6             6.19            0.012              1.03        2321.0            2.3          -12.4       0.16         235         0.434        426.3        -370.2            -24.48            -0.049               0.88        -5752.0            -5.8           -11.5       -0.65
+69     grid_t0.4_s0.5_d0.7_te0_w1130        375        0.555       333.2       -409.4             2.50            0.005              1.01         939.0            0.9          -11.6       0.08         236         0.504        311.6        -380.0            -31.26            -0.063               0.83        -7378.0            -7.4           -10.5       -1.00
+138  grid_t1.0_s0.5_d0.575_te0_w1130        376        0.362       753.7       -434.3            -4.61           -0.009              0.98       -1734.0           -1.7          -14.7      -0.09         235         0.345        698.3        -402.8            -23.30            -0.047               0.91        -5475.0            -5.5           -14.8       -0.46
+67     grid_t0.4_s0.5_d0.7_te1_w1130        390        0.344       340.9       -188.4            -6.55           -0.013              0.95       -2556.0           -2.6           -6.3      -0.31         244         0.283        321.9        -170.7            -31.37            -0.063               0.74        -7655.0            -7.7            -8.2       -1.54
+135  grid_t1.0_s0.5_d0.575_te1_w1130        390        0.228       732.4       -226.2            -7.44           -0.015              0.96       -2902.0           -2.9           -8.7      -0.20         244         0.184        799.5        -203.7            -18.71            -0.037               0.89        -4565.0            -4.6           -13.1       -0.50
+103    grid_t0.6_s0.5_d0.7_te1_w1130        390        0.272       466.6       -184.8            -7.75           -0.016              0.94       -3024.0           -3.0           -7.3      -0.29         244         0.225        460.5        -163.8            -23.11            -0.046               0.82        -5638.0            -5.6            -9.2       -0.94
+63   grid_t0.4_s0.5_d0.575_te1_w1130        391        0.381       355.5       -231.8            -7.98           -0.016              0.94       -3120.0           -3.1           -7.3      -0.33         244         0.316        345.5        -214.3            -37.61            -0.075               0.74        -9177.0            -9.2           -10.1       -1.59

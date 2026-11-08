@@ -1,0 +1,7 @@
+{
+  "n_days": 994,
+  "first_day": "2022-10-03",
+  "last_day": "2026-09-28",
+  "split_day": "2025-02-27",
+  "best_in_sample": "grid_t1.0_s0.5_d0.7_te0_w1130"
+}

@@ -1,0 +1,8 @@
+id=0 kind=condor sdelta=0.3 ldelta=0.05 wing=1 entry=870 smult=-1 tp=-1 risk=0.01 fee=0.05 syms=1 fixed=1 exit=950
+id=1 kind=put_spread sdelta=0.3 ldelta=0.05 wing=1 entry=660 smult=-1 tp=-1 risk=0.01 fee=0.05 syms=1 fixed=1 exit=950
+id=2 kind=calendar right=P koff=1 entry=585 stop=0.5 tp=-1 exit=950 risk=0.01 fee=0.05 syms=1 fixed=1
+id=3 kind=orb_spread target=0.4 stop=0.2 delta=0.575 wstart=585 wend=690 fexit=900 retest=1 vol=1 vwap=1 ema=1 tech=0 risk=0.01 dll=0.01 maxtr=2 fee=0.05 sdelta=0.3 wing=1 smult=-1 tp=-1 syms=3 fixed=1 exit=950
+id=4 kind=trend_spread sdelta=0.3 ldelta=0.05 wing=1 entry=870 smult=-1 tp=-1 risk=0.01 fee=0.05 syms=2 fixed=1 exit=950
+id=5 kind=call_spread sdelta=0.3 ldelta=0.05 wing=0 entry=870 smult=-1 tp=-1 risk=0.01 fee=0.05 syms=1 fixed=1 exit=950
+id=6 kind=orb target=0.4 stop=0.3 delta=0.4 wstart=585 wend=690 fexit=900 retest=1 vol=1 vwap=1 ema=1 tech=0 risk=0.005 dll=0.01 maxtr=2 fee=0.05 syms=3 fixed=1
+id=7 kind=orb target=0.4 stop=0.2 delta=0.575 wstart=585 wend=690 fexit=900 retest=1 vol=1 vwap=1 ema=1 tech=1 dll=1000000000.0 maxtr=2 fee=0.05 fixed=1 maxprem=1.0 syms=3
