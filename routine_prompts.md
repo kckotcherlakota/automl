@@ -85,6 +85,10 @@ Email subject "0DTE daily report <YYYY-MM-DD>":
    peak and drawdown (start equity $204.29, dry run from 2026-11-09)
  - put "KILL SWITCH - bot stopped" at the TOP if: 3 losing days in a row, or equity < 50% of peak,
    or equity < $70 (can't fund one condor).
+ - DRY_RUN close-time comparison: per symbol, put today's "### Snapshot" results for 15:35 and
+   15:40 from notes/daily_notes.md next to 15:50 (natural closing debit, P&L with mid credit and
+   with natural credit; say "missing" if a snapshot is absent), and keep the running totals above
+   separately for each close time (15:35 / 15:40 / 15:50). The kill switch uses the 15:40 column.
 ```
 
 ---
