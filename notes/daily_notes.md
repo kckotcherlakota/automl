@@ -17,14 +17,6 @@ Format per day:
 - closing debit (filled & natural), P&L, win/loss, slippage per leg; running total / equity
 ### Learnings
 - real vs model; data or tool problems; ideas (untested = say so)
-### Handoff for tomorrow
-- next trading day + event day?; open issues; sources that failed; what morning prep must check
-```
-
----
-
-
-## 2026-11-09 (Mon)
 ### Morning prep (~09:00 ET)
 - Options Level 3: yes. Market open, normal day; SPY 0DTE expiration 2026-11-09 listed.
 - Account value / buying power $284.29 (up from $204.29: +$80 deposit). Bot budget stays capped at
@@ -78,3 +70,15 @@ Format per day:
 - PAPER P&L: +$4.84 (mid credit, natural close), +$2.84 (natural/natural), +$6.84 (mid/mid). WIN.
 - Learnings: real SPY 0DTE legs were 1c wide all afternoon (bid/ask), consistent with the model's
   half-spread; with 37 min held (late entry 14:59) the condor still captured ~$5-7 of decay.
+### Close (15:38 ET)
+- No open position (no live condor; owner did not place the manual one). Nothing to close.
+- Account value $274.75. LIVE totals since 2026-11-09: 0 trades, $0. No kill switch.
+### Handoff for tomorrow
+- Tue 2026-11-10 = October CPI -> EVENT DAY: SKIP (morning prep should write it and email).
+- Next tradable day Wed 2026-11-11 (Veterans Day; stocks/options open).
+- BLOCKER: Robinhood rejects agent multi-leg orders (6 rejections today, approvals off). Expect
+  the Wed entry to be rejected; skip, email, never leg in. Owner decision pending: stay LIVE,
+  switch to PAPER, or move to a broker that accepts agent condors (Public suggested).
+- Other agent-initiated single-call trades hit this account today (IWM/SPY, -$9.54). If an
+  unknown position is open at entry, skip.
+- New: PAPER single-leg tracker routine at 16:07 ET (PLAYBOOK §9).
