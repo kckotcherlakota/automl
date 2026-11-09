@@ -39,6 +39,10 @@ Durable lessons and running statistics. Updated once a week (Friday weekly revie
   within ~15% of model and total paper P&L not clearly negative.)
 
 ## Lessons (keep short, newest first)
+- 2026-11-09: Agent multi-leg orders rejected ("requires the customer to approve agent-placed
+  trades") 6 times, including after the owner turned approvals off (setting read false) and after
+  reconnecting. The readable setting does not reflect the block. Single-leg agent orders from
+  another agent filled directly the same morning. Open with Robinhood support.
 - 2026-11-09: First live entry REJECTED: Robinhood "requires the customer to approve agent-placed
   trades" and multi-leg orders cannot be approved, though get_trade_approval_setting said OFF.
   Never leg a condor in as single orders. Other agent-initiated trades (IWM/SPY single calls)

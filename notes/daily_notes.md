@@ -68,3 +68,7 @@ Format per day:
   buy  752P 867b9f53-a65f-484c-a667-2fe752735171 bid/ask 0.26/0.27 delta -0.22
 - mid credit 0.42, natural credit 0.40, collateral ~$58 (RH would hold $100). Approvals now ON
   (setting flipped to true 14:57:37 after the owner reconnected the connector).
+- 15:03 test (owner approved): unfillable 4-leg condor (limit credit 0.95) REJECTED with the same
+  approval error although get_trade_approval_setting = false (updated 15:02:07). Nothing placed.
+  Conclusion: the setting the agent reads is not what blocks agent multi-leg orders. Needs
+  Robinhood support; until fixed the bot cannot trade condors live.
