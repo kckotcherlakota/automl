@@ -182,6 +182,6 @@ Rule (same as the backtest's "orb" family, 1 contract):
 
 Write `### PAPER single-leg (after close)` in today's daily notes: OR high/low, signal times, side,
 strike, entry/exit times and prices, reason, P&L (or "no signal"); keep a running total line
-"single-leg paper total since 2026-11-10: N trades, W wins, $P". Commit, push. No email unless a
+"single-leg paper total since 2026-11-09: N trades, W wins, $P". Commit, push. No email unless a
 data source failed through its whole ladder. The Friday weekly review adds a "Single-leg paper"
 row (trades, win %, total P&L) to notes/long_term_notes.md.
