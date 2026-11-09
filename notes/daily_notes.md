@@ -60,3 +60,11 @@ Format per day:
   the connector needs a fresh connection). Wed: if place is rejected again the same way, skip,
   email the owner to reconnect the Robinhood connector in claude.ai settings. Never leg in.
 - Open issue: foreign agent trades on MCP. If an unknown position is open at entry, skip.
+### PAPER entry (14:59 ET) — owner asked for a paper trade (live orders blocked by approvals)
+- PAPER condor, 1 lot, spot 753.82. Legs (instrument ids):
+  sell 755C 662448f9-3052-403b-88d3-f12ca106c239 bid/ask 0.38/0.39 delta 0.28
+  buy  756C 75d7f8d3-e6cd-4ff9-9c2b-2630ca1f2da7 bid/ask 0.21/0.22 delta 0.17
+  sell 753P ac0508fc-3dce-4412-8385-9fbc51757bfe bid/ask 0.51/0.52 delta -0.37
+  buy  752P 867b9f53-a65f-484c-a667-2fe752735171 bid/ask 0.26/0.27 delta -0.22
+- mid credit 0.42, natural credit 0.40, collateral ~$58 (RH would hold $100). Approvals now ON
+  (setting flipped to true 14:57:37 after the owner reconnected the connector).
