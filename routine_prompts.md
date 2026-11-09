@@ -1,7 +1,8 @@
 # $100 bot — routine prompts (paste-ready, self-contained)
 
-**Current mode: DRY_RUN** (switched back from LIVE on 2026-11-08 before any live trade: a re-run backtest showed the
-edge disappears with a 15:40 close or +1¢/leg slippage — see notes/long_term_notes.md).
+**Current mode: LIVE since 2026-11-09 — SPY condor only, closed 15:38–15:44 ET.** The prompts
+actually installed are the "LIVE configuration" section at the end of this file; the sections
+in between are history (dry-run versions, snapshots and bull put, now disabled).
 
 Create two routines, each **starting a fresh session on every run**, scheduled in New York time,
 Monday–Friday:
@@ -226,3 +227,20 @@ and two flags: `backtest_would_trade` (natural credit > $0.02) and `live_rule_wo
 (mid credit ≥ $0.10, collateral ≤ buying power, VIX ≤ 30). It emails "0DTE bull put DRY
 <date>" with a JSON block. The 15:40 snapshot routine prices the close and P&L; the 15:50
 daily report and the Friday review keep separate running totals per rule. Read-only throughout.
+
+---
+
+# LIVE configuration (from 2026-11-09)
+
+Owner's choices on 2026-11-08: condor LIVE, **SPY only**, close **by 15:44 ET** (ahead of
+Robinhood's 15:45 auto-close of at-risk expiring late-close options), bull put spread dropped.
+
+| routine | cron | change from dry run |
+|---|---|---|
+| `0DTE morning prep (LIVE, SPY)` | `CRON_TZ=America/New_York 7 9 * * 1-5` | SPY only; emails if trade approvals are OFF |
+| `0DTE condor entry (LIVE, SPY)` | `CRON_TZ=America/New_York 30 14 * * 1-5` | MODE=LIVE, SPY only, skips if any option position is open, no opening orders after 15:00 |
+| `0DTE condor close (LIVE, SPY, 15:38)` | `CRON_TZ=America/New_York 38 15 * * 1-5` | closes FIRST (before notes), natural debit, +0.02/min to 15:43, then natural + 0.05; URGENT email if anything is open at 15:44 |
+| `0DTE weekly review` | `CRON_TZ=America/New_York 17 16 * * 5` | live totals, slippage per leg vs model, 20-trade review |
+
+Disabled: 15:35 snapshot, 15:40 snapshot + bull put close, bull put entry, daily `/clear`.
+Kill switch (in the close report): 3 losing days in a row, equity < 50% of peak, or equity < $70.

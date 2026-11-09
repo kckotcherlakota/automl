@@ -4,18 +4,19 @@ Durable lessons and running statistics. Updated once a week (Friday weekly revie
 `daily_notes.md` before that file is cleared. Read at the start of every trading day.
 
 ## Setup (routine IDs; all run in session session_012ZPnNbEARMTpMMQ1Weeq33, New York time)
-- trig_01R4cdsFSJEjPmRR2157m314  0DTE morning prep (DRY RUN)  09:07 Mon-Fri
-- trig_01U4piD2uwooiZf8YGWNP81z  0DTE condor entry (DRY RUN)  14:30 Mon-Fri
-- trig_01PQpQw3NJam4eySAJ8ZS2f7  0DTE condor close (DRY RUN)  15:50 Mon-Fri
-- trig_01S6N4ou9mVZ43FRWDpuuSYG  0DTE snapshot 15:35 (DRY RUN)  15:35 Mon-Fri
-- trig_01DGWykto5NnYstHFDaBowch  0DTE snapshot 15:40 + bull put close (DRY RUN)  15:40 Mon-Fri
-- trig_01PKAjbj1ZarjNSZDcfas9VE  0DTE bull put entry (DRY RUN)  09:45 Mon-Fri
-- trig_0161yiuFh5aixJVJpB5BcwFo  0DTE weekly review           16:17 Fri
-- trig_01Y8kAHGdihXxhLSj55KPLCX  daily /clear (DISABLED 2026-11-08: a routine-sent /clear arrives as plain text and does not clear; chat history is compacted automatically, these notes are the memory)
-- Prompts and notes protocol: routine_prompts.md. Mode: DRY_RUN (briefly set to LIVE on 2026-11-08, reverted
-  the same day before any trade). Trade approvals OFF — must be ON before LIVE.
+- LIVE from 2026-11-09, SPY condor only (QQQ off), close by 15:44 (Robinhood auto-closes at-risk
+  expiring options from 15:45). Owner chose: 15:40-style close, SPY only, bull put dropped.
+- trig_01R4cdsFSJEjPmRR2157m314  0DTE morning prep (LIVE, SPY)        09:07 Mon-Fri
+- trig_01U4piD2uwooiZf8YGWNP81z  0DTE condor entry (LIVE, SPY)        14:30 Mon-Fri
+- trig_01PQpQw3NJam4eySAJ8ZS2f7  0DTE condor close (LIVE, SPY, 15:38) 15:38 Mon-Fri (retries to 15:43)
+- trig_0161yiuFh5aixJVJpB5BcwFo  0DTE weekly review                   16:17 Fri
+- DISABLED: trig_01S6N4ou9mVZ43FRWDpuuSYG (15:35 snapshot), trig_01DGWykto5NnYstHFDaBowch (15:40
+  snapshot + bull put close), trig_01PKAjbj1ZarjNSZDcfas9VE (bull put entry),
+  trig_01Y8kAHGdihXxhLSj55KPLCX (daily /clear: does not work from a routine).
+- Trade approvals were OFF on 2026-11-08: orders execute without a tap in the app.
+- Prompts: routine_prompts.md.
 
-## Running totals (dry run from 2026-11-09, account $204.29)
+## Running totals (LIVE from 2026-11-09, start equity $204.29)
 | week ending | trades | wins | win % | week P&L (mid) | week P&L (natural) | cumulative P&L (natural) | peak | drawdown |
 |---|---|---|---|---|---|---|---|---|
 
@@ -23,11 +24,11 @@ Durable lessons and running statistics. Updated once a week (Friday weekly revie
 - Model: typical credit $0.35–0.45 per condor, collateral ~$61. (Go-live rule: real credits
   within ~15% of model and total paper P&L not clearly negative.)
 
-## Bull put dry run (article strategy: SPY 2% OTM put spread, $2 wide, 09:45 -> 15:40)
-| week ending | rule | days flagged | trades | wins | week P&L mid | week P&L natural | cum natural |
-|---|---|---|---|---|---|---|---|
-
 ## Lessons (keep short, newest first)
+- 2026-11-08: Owner put the condor LIVE from 2026-11-09 against the dry-run recommendation:
+  backtest at a 15:40 close is +$5.94/trade at model prices but -$2.06 with +1c/leg slippage.
+  Watch real slippage per leg closely; > 1c/leg average means the strategy is losing money.
+  Bull put spread dropped (needs ~$189 collateral, blocks the condor on its days with $204).
 - 2026-11-08: Tradealgo 0DTE article strategies backtested (same model, 09:45 entry, 15:40 close,
   1 lot). Credit spreads/condors 1-2% OTM $2 wide: TP50%/stop rules lose everywhere; hold-to-15:40
   best. Only SPY bull put 2% OTM survives +1c/leg: 126 of 994 days traded, +$2.70/trade, +$340
