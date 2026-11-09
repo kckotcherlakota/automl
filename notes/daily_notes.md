@@ -72,3 +72,9 @@ Format per day:
   approval error although get_trade_approval_setting = false (updated 15:02:07). Nothing placed.
   Conclusion: the setting the agent reads is not what blocks agent multi-leg orders. Needs
   Robinhood support; until fixed the bot cannot trade condors live.
+### PAPER close (15:36 ET)
+- No live/manual position open (owner did not place the condor). SPY 754.57.
+- 755C 0.43/0.44, 756C 0.17/0.18, 753P 0.15/0.16, 752P 0.06/0.07 -> natural debit 0.37, mid 0.35.
+- PAPER P&L: +$4.84 (mid credit, natural close), +$2.84 (natural/natural), +$6.84 (mid/mid). WIN.
+- Learnings: real SPY 0DTE legs were 1c wide all afternoon (bid/ask), consistent with the model's
+  half-spread; with 37 min held (late entry 14:59) the condor still captured ~$5-7 of decay.
