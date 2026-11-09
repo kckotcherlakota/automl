@@ -48,7 +48,8 @@ Format per day:
 - 14:41 owner turned approvals off (setting updated 14:40:59 ET). Retried: spot 754.94, condor
   -756C/+757C (0.34/0.24 delta), -753P/+752P (-0.26/-0.16); mid 0.41, natural 0.38, limit 0.40.
   Review OK, but place rejected TWICE with the same approval error (setting reads OFF). No order exists.
-  Stopped retrying; no condor today.
+  Owner asked to retry at 14:44, 14:52 and 14:56 (754/755C + 752/751P etc., mid 0.39-0.46):
+  all rejected with the same approval error. 5 rejections total; no order exists. No condor today.
 ### Learnings
 - Robinhood can require approval for agent orders even when the setting reads OFF; multi-leg
   orders cannot be approved -> the condor cannot be placed until the owner removes that.
