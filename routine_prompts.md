@@ -1,8 +1,9 @@
 # $100 bot — routine prompts (paste-ready, self-contained)
 
-**Current mode: LIVE since 2026-11-09 — SPY condor only, closed 15:38–15:44 ET.** The prompts
-actually installed are the "LIVE configuration" section at the end of this file; the sections
-in between are history (dry-run versions, snapshots and bull put, now disabled).
+**Current mode: LIVE since 2026-11-09 — SPY condor only, closed 15:38–15:44 ET, $200 cap.**
+**All rules now live in [`PLAYBOOK.md`](PLAYBOOK.md).** The routines installed today are short
+wrappers listed in the "Installed routines" section at the END of this file. Everything in between
+is history (dry-run versions, snapshots, bull put — disabled).
 
 Create two routines, each **starting a fresh session on every run**, scheduled in New York time,
 Monday–Friday:
@@ -247,3 +248,22 @@ Disabled: 15:35 snapshot, 15:40 snapshot + bull put close, bull put entry, daily
 collateral > min(buying power, $200), no scaling with account size.
 
 Kill switch (in the close report): 3 losing days in a row, equity < 50% of peak, or equity < $70.
+
+---
+
+# Installed routines (2026-11-09) — wrappers around PLAYBOOK.md
+
+All fire into session `session_012ZPnNbEARMTpMMQ1Weeq33` (New York time). If the chat is cleared,
+the routines keep firing and rebuild their context from PLAYBOOK.md + notes/.
+
+| id | name | cron |
+|---|---|---|
+| trig_01R4cdsFSJEjPmRR2157m314 | 0DTE morning prep (LIVE, SPY) | `CRON_TZ=America/New_York 7 9 * * 1-5` |
+| trig_01U4piD2uwooiZf8YGWNP81z | 0DTE condor entry (LIVE, SPY) | `CRON_TZ=America/New_York 30 14 * * 1-5` |
+| trig_01PQpQw3NJam4eySAJ8ZS2f7 | 0DTE condor close (LIVE, SPY, 15:38) | `CRON_TZ=America/New_York 38 15 * * 1-5` |
+| trig_0161yiuFh5aixJVJpB5BcwFo | 0DTE weekly review | `CRON_TZ=America/New_York 17 16 * * 5` |
+
+- Morning prep / entry / weekly review: pull the repo, read PLAYBOOK.md + both notes files, run
+  PLAYBOOK §4 / §5 / §7. Entry does NOT trade if the repo can't be read.
+- Close: self-contained closing steps (PLAYBOOK §6 steps 1–3 inlined) run FIRST, without needing
+  git; then the report email and notes incl. "### Handoff for tomorrow".

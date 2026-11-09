@@ -1,5 +1,8 @@
 # $100 0DTE bot — SPY + QQQ iron condors
 
+> **Operating rules for the live bot: [`PLAYBOOK.md`](PLAYBOOK.md)** (current: LIVE, SPY only, $200 cap,
+> close by 15:44 ET). Notes/memory: `notes/`. Everything below is the original research write-up.
+
 **One strategy, on SPY and then QQQ.** It is the only setup that held up for a $100 account in
 the backtest (994 trading days, Oct 2022 – Sep 2026; full backtest code is in git history at commit 1f7143c):
 

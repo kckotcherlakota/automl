@@ -19,12 +19,16 @@ Durable lessons and running statistics. Updated once a week (Friday weekly revie
 - Prompts: routine_prompts.md.
 
 ## Event days (skip in LIVE: CPI, FOMC decision, jobs report) — keep this list current
-- Source: bls.gov/schedule (CPI, Employment Situation) and federalreserve.gov FOMC calendar,
-  checked by web search on 2026-11-09. FMP connector has no economic calendar.
+- Sources: finviz.com/calendar/economic (best: whole week), bls.gov/schedule, federalreserve.gov.
+  Checked 2026-11-09. FMP connector has no economic calendar. Info-only (no skip): PPI, Fed
+  speakers, jobless claims.
 - 2026-11-10 Tue: October CPI 08:30 ET -> SKIP
 - 2026-12-09 Wed: FOMC decision 14:00 ET -> SKIP
 - 2026-12-10 Thu: November CPI 08:30 ET -> SKIP
-- Next jobs report (Employment Situation): date not confirmed yet -> morning prep must check.
+- 2026-11-13 Fri: October PPI 08:30 ET (info only, trade normally)
+- October jobs report already released (~2026-11-06). Next (November) jobs report: likely
+  early December (~2026-12-04), UNCONFIRMED -> morning prep must confirm.
+- 2026-11-11 Wed Veterans Day: stocks/options OPEN (bond market closed) -> trade normally.
 
 ## Running totals (LIVE from 2026-11-09, start equity $204.29)
 | week ending | trades | wins | win % | week P&L (mid) | week P&L (natural) | cumulative P&L (natural) | peak | drawdown |
