@@ -82,3 +82,11 @@ Format per day:
 - Other agent-initiated single-call trades hit this account today (IWM/SPY, -$9.54). If an
   unknown position is open at entry, skip.
 - New: PAPER single-leg tracker routine at 16:07 ET (PLAYBOOK §9).
+### PAPER single-leg (after close)
+- OR 09:30-09:45: high 746.785, low 741.09. Up-break armed 09:45-09:50 bar (close 747.065, vol 506k
+  > vol20 497k); retest + confirm on 09:50-09:55 bar (low 746.805 <= OR high x1.0005, close 747.635,
+  above VWAP, EMA9>EMA21) -> LONG signal 09:55 ET. No second signal before 11:30.
+- Bought SPY 2026-11-09 749C (first OTM strike) at 1.52+0.01 = 1.53 (09:55 bar close, mark bars).
+  Target 2.14 / stop 1.07. Target hit in the 10:40-10:45 bar (high 2.24, open 1.79) -> exit 2.14.
+- P&L +$61.12 (target). Caveat: option bars are marks; real fills may differ.
+- single-leg paper total since 2026-11-09: 1 trades, 1 wins, $61.12
