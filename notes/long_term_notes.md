@@ -7,6 +7,8 @@ Durable lessons and running statistics. Updated once a week (Friday weekly revie
 - trig_01R4cdsFSJEjPmRR2157m314  0DTE morning prep (DRY RUN)  09:07 Mon-Fri
 - trig_01U4piD2uwooiZf8YGWNP81z  0DTE condor entry (DRY RUN)  14:30 Mon-Fri
 - trig_01PQpQw3NJam4eySAJ8ZS2f7  0DTE condor close (DRY RUN)  15:50 Mon-Fri
+- trig_01S6N4ou9mVZ43FRWDpuuSYG  0DTE snapshot 15:35 (DRY RUN)  15:35 Mon-Fri
+- trig_01DGWykto5NnYstHFDaBowch  0DTE snapshot 15:40 (DRY RUN)  15:40 Mon-Fri
 - trig_0161yiuFh5aixJVJpB5BcwFo  0DTE weekly review           16:17 Fri
 - trig_01Y8kAHGdihXxhLSj55KPLCX  daily /clear (DISABLED 2026-11-08: a routine-sent /clear arrives as plain text and does not clear; chat history is compacted automatically, these notes are the memory)
 - Prompts and notes protocol: routine_prompts.md. Mode: DRY_RUN (briefly set to LIVE on 2026-11-08, reverted

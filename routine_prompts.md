@@ -107,6 +107,8 @@ Four routines, all Mon–Fri New York time unless noted:
 |---|---|
 | `0DTE morning prep (DRY RUN)` | `CRON_TZ=America/New_York 7 9 * * 1-5` |
 | `0DTE condor entry (DRY RUN)` | `CRON_TZ=America/New_York 30 14 * * 1-5` |
+| `0DTE snapshot 15:35 (DRY RUN)` | `CRON_TZ=America/New_York 35 15 * * 1-5` |
+| `0DTE snapshot 15:40 (DRY RUN)` | `CRON_TZ=America/New_York 40 15 * * 1-5` |
 | `0DTE condor close (DRY RUN)` | `CRON_TZ=America/New_York 50 15 * * 1-5` |
 | `0DTE weekly review` | `CRON_TZ=America/New_York 17 16 * * 5` (Fridays) |
 | `0DTE daily session clear` (prompt: `/clear`) — **disabled**: a routine-sent `/clear` does not clear the session | `CRON_TZ=America/New_York 13 17 * * 1-5` |
@@ -201,3 +203,12 @@ Earlier messages in this conversation are stale; do not reuse anything from them
 5. Email kckota9@gmail.com (Gmail connector) "0DTE weekly review <YYYY-MM-DD>": the week's row,
    cumulative totals, real-vs-model credit, new lessons, and go/no-go status if due.
 ```
+
+## 0DTE snapshot 15:35 / 15:40 (DRY RUN, Mon–Fri)
+
+Two routines with the same prompt except the time (routines must be ≥ 1 hour apart, so one
+routine cannot run at both 15:35 and 15:40). Read-only, no email: they read today's entry JSON
+from Gmail, quote the 4 legs, compute natural/mid closing debit and P&L, and append
+"### Snapshot HH:MM ET" to `notes/daily_notes.md`. The 15:50 close report compares all three
+close times; the weekly review keeps running totals per close time. Purpose: test whether the
+edge survives a close before Robinhood's 15:45 auto-close of at-risk late-close options.
