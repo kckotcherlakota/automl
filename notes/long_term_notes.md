@@ -13,6 +13,8 @@ Durable lessons and running statistics. Updated once a week (Friday weekly revie
 - DISABLED: trig_01S6N4ou9mVZ43FRWDpuuSYG (15:35 snapshot), trig_01DGWykto5NnYstHFDaBowch (15:40
   snapshot + bull put close), trig_01PKAjbj1ZarjNSZDcfas9VE (bull put entry),
   trig_01Y8kAHGdihXxhLSj55KPLCX (daily /clear: does not work from a routine).
+- BUDGET: owner's hard cap $200 for this bot, ever. Always 1 contract, collateral <= min(BP, $200),
+  no scaling with account size, no extra deposits for this bot.
 - Trade approvals were OFF on 2026-11-08: orders execute without a tap in the app.
 - Prompts: routine_prompts.md.
 

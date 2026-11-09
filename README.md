@@ -65,8 +65,8 @@ Y4 = Oct 2025–Sep 2026.
 4. **15:50 ET — close** all four legs with a limit debit at the natural price.
    - Retry $0.02 higher every minute, with the last try by 15:57.
    - **Never hold past the close.** An in-the-money short leg means assigned SPY shares.
-5. **Size:** 1 contract. Above **$600**, contracts = floor(account ÷ 300), which keeps ~3 max
-   losses of buffer per contract. This scaling was **not** in the backtest.
+5. **Size:** always 1 contract. The owner capped this bot at **$200** (2026-11-08): no scaling
+   with account size, and collateral is never more than $200.
 6. **Stop trading and email you** if any of these happen:
    - the account can't cover one condor's collateral;
    - **3 losing trades in a row**;

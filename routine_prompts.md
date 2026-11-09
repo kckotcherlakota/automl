@@ -243,4 +243,7 @@ Robinhood's 15:45 auto-close of at-risk expiring late-close options), bull put s
 | `0DTE weekly review` | `CRON_TZ=America/New_York 17 16 * * 5` | live totals, slippage per leg vs model, 20-trade review |
 
 Disabled: 15:35 snapshot, 15:40 snapshot + bull put close, bull put entry, daily `/clear`.
+**Budget:** hard cap of **$200** for this bot (owner, 2026-11-08): always 1 contract, skip if
+collateral > min(buying power, $200), no scaling with account size.
+
 Kill switch (in the close report): 3 losing days in a row, equity < 50% of peak, or equity < $70.
