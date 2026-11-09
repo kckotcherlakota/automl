@@ -112,7 +112,8 @@ Four routines, all Mon–Fri New York time unless noted:
 | `0DTE morning prep (DRY RUN)` | `CRON_TZ=America/New_York 7 9 * * 1-5` |
 | `0DTE condor entry (DRY RUN)` | `CRON_TZ=America/New_York 30 14 * * 1-5` |
 | `0DTE snapshot 15:35 (DRY RUN)` | `CRON_TZ=America/New_York 35 15 * * 1-5` |
-| `0DTE snapshot 15:40 (DRY RUN)` | `CRON_TZ=America/New_York 40 15 * * 1-5` |
+| `0DTE snapshot 15:40 + bull put close (DRY RUN)` | `CRON_TZ=America/New_York 40 15 * * 1-5` |
+| `0DTE bull put entry (DRY RUN)` | `CRON_TZ=America/New_York 45 9 * * 1-5` |
 | `0DTE condor close (DRY RUN)` | `CRON_TZ=America/New_York 50 15 * * 1-5` |
 | `0DTE weekly review` | `CRON_TZ=America/New_York 17 16 * * 5` (Fridays) |
 | `0DTE daily session clear` (prompt: `/clear`) — **disabled**: a routine-sent `/clear` does not clear the session | `CRON_TZ=America/New_York 13 17 * * 1-5` |
@@ -216,3 +217,12 @@ from Gmail, quote the 4 legs, compute natural/mid closing debit and P&L, and app
 "### Snapshot HH:MM ET" to `notes/daily_notes.md`. The 15:50 close report compares all three
 close times; the weekly review keeps running totals per close time. Purpose: test whether the
 edge survives a close before Robinhood's 15:45 auto-close of at-risk late-close options.
+
+## Bull put spread dry run (article strategy)
+
+`0DTE bull put entry (DRY RUN)` at 09:45 ET quotes the SPY 0DTE put spread: short put =
+floor(spot × 0.98), long put = short − $2. It records mid/natural credit, collateral and VIX,
+and two flags: `backtest_would_trade` (natural credit > $0.02) and `live_rule_would_trade`
+(mid credit ≥ $0.10, collateral ≤ buying power, VIX ≤ 30). It emails "0DTE bull put DRY
+<date>" with a JSON block. The 15:40 snapshot routine prices the close and P&L; the 15:50
+daily report and the Friday review keep separate running totals per rule. Read-only throughout.
