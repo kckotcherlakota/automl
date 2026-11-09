@@ -33,4 +33,6 @@ Format per day:
 - Event filter (web search of bls.gov / federalreserve.gov calendars): no CPI, FOMC or jobs report
   today -> normal day. Tomorrow Tue 2026-11-10 = October CPI 08:30 ET -> EVENT DAY, skip.
 - Trade approvals: OFF -> orders execute without owner tap. ATTENTION email sent.
-- Plan 14:30: trade 1 SPY condor (0.30 delta, $1 wings) if mid credit >= $0.15; close 15:38-15:43.
+- Market context (Finviz, 09:22 ET): SPY 741.67 (+0.87% pre-open) after last week's -1.4% selloff;
+  Dow futures +600 on lower oil; Nvidia falling on a CEO probe. RSI 39, ATR(14) $10.30. Not HIGH RISK.
+- PLAN: TRADE (1 SPY condor, 0.30 delta, $1 wings, if mid credit >= $0.15; close 15:38-15:43).
