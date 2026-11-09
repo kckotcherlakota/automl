@@ -43,6 +43,11 @@ Durable lessons and running statistics. Updated once a week (Friday weekly revie
   trades") 6 times, including after the owner turned approvals off (setting read false) and after
   reconnecting. The readable setting does not reflect the block. Single-leg agent orders from
   another agent filled directly the same morning. Open with Robinhood support.
+  Research: Robinhood help "Trading with your agent" says agents place "long equities, options,
+  and crypto orders"; "Certain trades may still require your approval even when trade approvals
+  are turned off"; approvals "still rolling out for MCP accounts". GitHub chasechipres/rh-gex-trader
+  issue #23 (Oct 15 2026, open): same error on a 2-leg MCP order with the setting false. Treat as a
+  Robinhood-side limitation: agent multi-leg/short (credit) option orders not accepted for now.
 - 2026-11-09: First live entry REJECTED: Robinhood "requires the customer to approve agent-placed
   trades" and multi-leg orders cannot be approved, though get_trade_approval_setting said OFF.
   Never leg a condor in as single orders. Other agent-initiated trades (IWM/SPY single calls)
