@@ -108,7 +108,9 @@ Trade (SPY only):
    direction credit; limit; price = mid credit rounded DOWN to 0.01; gfd). Report order_checks.
    Then `place_option_order` with the same parameters and a fresh ref_id. Unfilled after 3 min →
    cancel, retry 0.01 lower, max 3 retries; then cancel and report "no fill". Day-trading
-   rejection → email "switch to Mon/Wed/Fri" and stop. **No new opening orders after 15:00 ET.**
+   rejection → email "switch to Mon/Wed/Fri" and stop. Rejection because the account requires the
+   customer to approve agent trades (multi-leg cannot be approved) → do NOT retry and NEVER leg in
+   as single orders; email the owner and skip. **No new opening orders after 15:00 ET.**
 
 Email "0DTE entry LIVE <date>": exact JSON block (time, spot, 4 strikes with bid/ask/mid/delta, mid
 and natural credit, filled credit, order id, collateral, quantity, skip reason, buying power,

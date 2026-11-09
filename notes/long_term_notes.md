@@ -39,6 +39,10 @@ Durable lessons and running statistics. Updated once a week (Friday weekly revie
   within ~15% of model and total paper P&L not clearly negative.)
 
 ## Lessons (keep short, newest first)
+- 2026-11-09: First live entry REJECTED: Robinhood "requires the customer to approve agent-placed
+  trades" and multi-leg orders cannot be approved, though get_trade_approval_setting said OFF.
+  Never leg a condor in as single orders. Other agent-initiated trades (IWM/SPY single calls)
+  happen on this account; the bot must not assume all activity is its own.
 - 2026-11-08: Owner put the condor LIVE from 2026-11-09 against the dry-run recommendation:
   backtest at a 15:40 close is +$5.94/trade at model prices but -$2.06 with +1c/leg slippage.
   Watch real slippage per leg closely; > 1c/leg average means the strategy is losing money.
