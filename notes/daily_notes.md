@@ -45,12 +45,17 @@ Format per day:
 - Other agent-initiated orders on MCP today, NOT placed by this bot: IWM 280/281/282C round trips
   10:04-11:54 ET and SPY 754C (buy 0.46 13:50, sell 0.37 13:53). All flat, net about -$9.54
   (BP $284.29 -> $274.75). Owner informed.
+- 14:41 owner turned approvals off (setting updated 14:40:59 ET). Retried: spot 754.94, condor
+  -756C/+757C (0.34/0.24 delta), -753P/+752P (-0.26/-0.16); mid 0.41, natural 0.38, limit 0.40.
+  Review OK, but place rejected TWICE with the same approval error (setting reads OFF). No order exists.
+  Stopped retrying; no condor today.
 ### Learnings
 - Robinhood can require approval for agent orders even when the setting reads OFF; multi-leg
   orders cannot be approved -> the condor cannot be placed until the owner removes that.
 - Another agent trades this same account. Positions/BP checks must assume foreign activity.
 ### Handoff for tomorrow
 - Tue 2026-11-10 = CPI -> EVENT DAY: SKIP. Next tradable day Wed 2026-11-11 (Veterans Day, market open).
-- Open issue: approval requirement blocks multi-leg orders. Check whether the owner fixed it
-  (a review_option_order does not show it; only place does). Keep never legging in.
+- Open issue: placement still blocked after the owner turned approvals off at 14:40:59 ET (maybe
+  the connector needs a fresh connection). Wed: if place is rejected again the same way, skip,
+  email the owner to reconnect the Robinhood connector in claude.ai settings. Never leg in.
 - Open issue: foreign agent trades on MCP. If an unknown position is open at entry, skip.
