@@ -1,14 +1,15 @@
 # $100 bot — routine prompts (paste-ready, self-contained)
 
-**Current mode: LIVE since 2026-11-09** (the 2–3 week dry run was skipped at the owner's request).
+**Current mode: DRY_RUN** (switched back from LIVE on 2026-11-08 before any live trade: a re-run backtest showed the
+edge disappears with a 15:40 close or +1¢/leg slippage — see notes/long_term_notes.md).
 
 Create two routines, each **starting a fresh session on every run**, scheduled in New York time,
 Monday–Friday:
 
 | routine | cron |
 |---|---|
-| `0DTE condor entry (LIVE)` | `CRON_TZ=America/New_York 30 14 * * 1-5` |
-| `0DTE condor close (LIVE)` | `CRON_TZ=America/New_York 50 15 * * 1-5` |
+| `0DTE condor entry (DRY RUN)` | `CRON_TZ=America/New_York 30 14 * * 1-5` |
+| `0DTE condor close (DRY RUN)` | `CRON_TZ=America/New_York 50 15 * * 1-5` |
 
 - **Day-trade fallback:** if your broker still enforces a day-trade limit, use `1,3,5` instead of `1-5`.
 - **Connectors:** the session that runs them needs the **Robinhood** and **Gmail** connectors.
@@ -22,7 +23,7 @@ Monday–Friday:
 ## condor-entry (14:30 ET, Mon–Fri)
 
 ```
-MODE=LIVE. You are my $100 SPY+QQQ 0DTE iron-condor bot, entry step (14:30 America/New_York).
+MODE=DRY_RUN. You are my $100 SPY+QQQ 0DTE iron-condor bot, entry step (14:30 America/New_York).
 If MODE=DRY_RUN you must NOT call review_option_order, place_option_order or any order/cancel tool:
 read-only Robinhood calls and email only.
 
@@ -63,7 +64,7 @@ The 15:50 close routine reads this JSON.
 ## condor-close (15:50 ET, Mon–Fri)
 
 ```
-MODE=LIVE. $100 SPY+QQQ 0DTE condor end-of-day close (15:50 America/New_York).
+MODE=DRY_RUN. $100 SPY+QQQ 0DTE condor end-of-day close (15:50 America/New_York).
 If MODE=DRY_RUN you must NOT call review_option_order, place_option_order or any order/cancel tool.
 Account: Robinhood "MCP" only. Email reports to kckota9@gmail.com with the Gmail connector.
 
@@ -81,7 +82,7 @@ P&L per symbol = (entry credit - closing debit) * 100 * quantity - 0.05 * 8 * qu
 Email subject "0DTE daily report <YYYY-MM-DD>":
  - per symbol: entry credit, closing debit, P&L, win/loss
  - running totals from all earlier "0DTE daily report" emails: trades, win rate, total P&L,
-   peak and drawdown (start equity $204.29, LIVE from 2026-11-09)
+   peak and drawdown (start equity $204.29, dry run from 2026-11-09)
  - put "KILL SWITCH - bot stopped" at the TOP if: 3 losing days in a row, or equity < 50% of peak,
    or equity < $70 (can't fund one condor).
 ```
@@ -104,9 +105,9 @@ Four routines, all Mon–Fri New York time unless noted:
 
 | routine | cron |
 |---|---|
-| `0DTE morning prep (LIVE)` | `CRON_TZ=America/New_York 7 9 * * 1-5` |
-| `0DTE condor entry (LIVE)` | `CRON_TZ=America/New_York 30 14 * * 1-5` |
-| `0DTE condor close (LIVE)` | `CRON_TZ=America/New_York 50 15 * * 1-5` |
+| `0DTE morning prep (DRY RUN)` | `CRON_TZ=America/New_York 7 9 * * 1-5` |
+| `0DTE condor entry (DRY RUN)` | `CRON_TZ=America/New_York 30 14 * * 1-5` |
+| `0DTE condor close (DRY RUN)` | `CRON_TZ=America/New_York 50 15 * * 1-5` |
 | `0DTE weekly review` | `CRON_TZ=America/New_York 17 16 * * 5` (Fridays) |
 | `0DTE daily session clear` (prompt: `/clear`) — **disabled**: a routine-sent `/clear` does not clear the session | `CRON_TZ=America/New_York 13 17 * * 1-5` |
 
@@ -140,7 +141,7 @@ NOTES PROTOCOL (memory between days; do this as well as the steps above):
 ## 0DTE morning prep (09:07 ET, Mon–Fri)
 
 ```
-MODE=LIVE. $100 SPY+QQQ 0DTE condor bot, MORNING PREP (09:07 America/New_York). Read-only:
+MODE=DRY_RUN. $100 SPY+QQQ 0DTE condor bot, MORNING PREP (09:07 America/New_York). Read-only:
 do NOT call review_option_order, place_option_order or any order/cancel tool.
 Account: Robinhood "MCP" only. Email to kckota9@gmail.com with the Gmail connector ONLY if
 something needs my attention (see below); otherwise no email.
@@ -159,8 +160,7 @@ Earlier messages in this conversation are stale; do not reuse anything from them
    e. Gmail: latest "0DTE daily report" - KILL SWITCH present? Did yesterday's close run
       (a daily report exists for the last trading day)?
    f. Optional: FMP economics calendar - FOMC decision, CPI or nonfarm payrolls today?
-   g. get_trade_approval_setting for MCP (record on/off). If OFF, that needs my attention:
-      orders will execute without my approval in the Robinhood app.
+   g. get_trade_approval_setting for MCP (record on/off; must be ON before LIVE).
 3. Append "## YYYY-MM-DD (Day)" and "### Morning prep (~09:00 ET)" to notes/daily_notes.md:
    the results above plus a short plan for 14:30 (which symbols to price, event-day flag,
    anything from long-term or daily notes to watch). Keep it under ~12 lines.
@@ -170,7 +170,7 @@ Earlier messages in this conversation are stale; do not reuse anything from them
    git push -u origin claude/busy-davinci-8zond5 (retry up to 4 times: 2s, 4s, 8s, 16s).
 5. Email "0DTE morning prep: ATTENTION <YYYY-MM-DD>" only if: market closed/half-day,
    KILL SWITCH, yesterday's close missing, open positions found, buying power < $70, options
-   level changed, trade approvals OFF, or the notes push failed. Never write full account numbers or secrets.
+   level changed, or the notes push failed. Never write full account numbers or secrets.
 ```
 
 ## 0DTE weekly review (16:17 ET, Fridays)
