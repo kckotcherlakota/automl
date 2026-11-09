@@ -33,6 +33,7 @@ Format per day:
 - Account value / buying power $284.29 (up from $204.29: +$80 deposit). Bot budget stays capped at
   $200 (owner rule) -> 1 contract, collateral <= $200.
 - Open option positions: none. No earlier "0DTE daily report" (first live day) -> no kill switch.
-- Event filter: FMP connector has no economic-calendar endpoint here -> event day unknown (n/a).
+- Event filter (web search of bls.gov / federalreserve.gov calendars): no CPI, FOMC or jobs report
+  today -> normal day. Tomorrow Tue 2026-11-10 = October CPI 08:30 ET -> EVENT DAY, skip.
 - Trade approvals: OFF -> orders execute without owner tap. ATTENTION email sent.
 - Plan 14:30: trade 1 SPY condor (0.30 delta, $1 wings) if mid credit >= $0.15; close 15:38-15:43.

@@ -18,6 +18,14 @@ Durable lessons and running statistics. Updated once a week (Friday weekly revie
 - Trade approvals were OFF on 2026-11-08: orders execute without a tap in the app.
 - Prompts: routine_prompts.md.
 
+## Event days (skip in LIVE: CPI, FOMC decision, jobs report) — keep this list current
+- Source: bls.gov/schedule (CPI, Employment Situation) and federalreserve.gov FOMC calendar,
+  checked by web search on 2026-11-09. FMP connector has no economic calendar.
+- 2026-11-10 Tue: October CPI 08:30 ET -> SKIP
+- 2026-12-09 Wed: FOMC decision 14:00 ET -> SKIP
+- 2026-12-10 Thu: November CPI 08:30 ET -> SKIP
+- Next jobs report (Employment Situation): date not confirmed yet -> morning prep must check.
+
 ## Running totals (LIVE from 2026-11-09, start equity $204.29)
 | week ending | trades | wins | win % | week P&L (mid) | week P&L (natural) | cumulative P&L (natural) | peak | drawdown |
 |---|---|---|---|---|---|---|---|---|
