@@ -39,6 +39,12 @@ Durable lessons and running statistics. Updated once a week (Friday weekly revie
   within ~15% of model and total paper P&L not clearly negative.)
 
 ## Lessons (keep short, newest first)
+- 2026-11-10: Strategy search (model prices, close 15:40, +1c/leg, 994 days). CONDORS: best is SPY
+  0.30d / $2 wings / enter 11:00-12:00 / close 15:40: +$13-14/trade after costs, all 4 years +,
+  OOS +$12-17, 69-72% winning weeks; but RH holds $200 collateral (= the whole cap). 14:30 $1-wing
+  condor is -$2/trade after costs. SINGLE-LEG long calls/puts (3,456 configs: ORB, trend, fade,
+  open-direction): only 46 positive after costs (~chance level); survivors win 9-20%, top 10 trades
+  = 240-290% of all profit, losing streaks 18-56, a $200 account dies within days. Not viable.
 - 2026-11-09: Agent multi-leg orders rejected ("requires the customer to approve agent-placed
   trades") 6 times, including after the owner turned approvals off (setting read false) and after
   reconnecting. The readable setting does not reflect the block. Single-leg agent orders from
