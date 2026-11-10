@@ -11,7 +11,7 @@ was shown in docs/LIVE_READINESS_2026-11-10.md and the 09:12 email. Scope of thi
 | Date | 2026-11-10 only (expires at 11:45 ET; next session needs a new release) |
 | Account | Robinhood "MCP" ••••8852 only |
 | Instruments | SPY/QQQ 0DTE, BUY-TO-OPEN call or put, SELL-TO-CLOSE owned contracts. Level 2 only: no spreads, no shorts |
-| Strategy | V3 Strategy A (ORB + VWAP trend continuation), rules per docs/MICRO_200_V3_RULEBOOK.md §3 |
+| Strategy | V3 Strategies A (ORB+VWAP, §3), B (SMT sweep reversal at frozen ORH/ORL, §4) and C (trend-filtered SMT pullback, prior-20-bar levels, §5). Operator added SMT at ~09:27 ET ("Use SMT techniques"). First valid signal from any takes the single position slot. Code: research/live/strat_a.py, research/live/strat_smt.py |
 | Entry window | 10:00–11:30 ET (CPI day); deadline liquidation from 11:40; broker-confirmed flat by 11:45 |
 | Contract | |delta| 0.20–0.30 (broker greeks, timestamped), prefer 0.25; spread ≤ $0.03 and ≤ 15% of mid; 1 contract |
 | Budget | $40 envelope: cumulative filled buy debits + pending + $5 contingency ≤ $40 → $35 usable; wins never replenish |
