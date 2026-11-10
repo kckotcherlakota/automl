@@ -107,3 +107,4 @@ Format per day:
 - 10:09 AMZN CALL SIGNAL (Strategy A: 10:05 breakout 272.39, retest + close above ORH 271.96, >VWAP, EMA up).
   NO_TRADE: 0.20d Nov-11 277.5C bid/ask 0.67/0.72 -> $72 > $35 budget AND spread $0.05 > $0.03 max.
   0.11d 280C $0.36 below stock delta floor 0.20.
+- 10:45 NVDA PUT breakout (5m 10:40-10:45 close 169.71 < ORL 170.65, below VWAP, EMA down). Contracts 11-11: 165P 0.28Δ ask 1.39 ($139 > $80 cap); 162.5P 0.19Δ ask 0.85 ($85, Δ<0.20 and > cap); 167.5P 0.40Δ 2.21. NO_TRADE (premium cap) regardless of retest.
