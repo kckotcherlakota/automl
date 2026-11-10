@@ -60,3 +60,9 @@ Operator, verbatim: "80$ for mamazon" (answer to: 1=$80 per stock trade, 2=$120,
 - Program stop-loss raised to cumulative −$80 (as proposed with option 1). Still max 1 filled entry/day.
 - Other stocks stay at $35; SPY/QQQ stay at $35 with affordable delta ≤0.40 (floor 0.10).
 - The 10:09 AMZN signal is NOT taken: spread $0.05 > $0.03 and the signal is stale (no chasing).
+
+## Stock budget addendum ~10:13 ET (operator)
+Operator, verbatim: "For stocks it's 80$"
+- ALL watchlist stocks (AAPL, NVDA, TSLA, AMD, META, AMZN, MSFT, PLTR): max premium $80 per trade
+  (100 × ask + fees ≤ $80). Other stock rules unchanged (0.20–0.30 delta nearest expiry, spread ≤ $0.03
+  and ≤ 15% mid, same exits, same-day close). SPY/QQQ stay $35. 1 entry/day; program stop −$80.
