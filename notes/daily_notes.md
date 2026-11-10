@@ -100,3 +100,10 @@ Format per day:
 - Premarket 09:12: SPY 748.50 (-0.6%), QQQ 672.26 (-1.0%). Not HIGH RISK.
 - LIVE=REQUESTED_NOT_READY (docs/LIVE_READINESS_2026-11-10.md: gates 1,3,4,5 fail, 2 partial).
 - PLAN: EVENT DAY: SKIP CPI (live). Paper V3-A replay after close.
+### LIVE session log (V3 A/B/C, operator release docs/LIVE_RELEASE_2026-11-10.md)
+- 09:46 OR: SPY 747.05-749.60, QQQ 669.92-675.47 (+8 stocks). SPY/QQQ 0.20-0.30 delta 0DTE cost $65-92 at 09:58 (unaffordable at $35).
+- 09:55 AAPL PUT breakout (348.42 < ORL 350.11): no retest within 10 bars. 0.28d Nov-11 345P was $1.16 anyway.
+- 09:55 AMD CALL breakout (525.47 > ORH 519.49): no retest within 10 bars.
+- 10:09 AMZN CALL SIGNAL (Strategy A: 10:05 breakout 272.39, retest + close above ORH 271.96, >VWAP, EMA up).
+  NO_TRADE: 0.20d Nov-11 277.5C bid/ask 0.67/0.72 -> $72 > $35 budget AND spread $0.05 > $0.03 max.
+  0.11d 280C $0.36 below stock delta floor 0.20.
