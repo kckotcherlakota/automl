@@ -52,3 +52,11 @@ Tightened (allowed by V3 §7.1 "operator may request a smaller limit"):
   until the operator re-approves in writing. Tracked in notes/long_term_notes.md.
 - Unchanged: ≤ $35 premium/day + $5 fee contingency (worst day ≈ −$40), $8 / −25% loss cut, no
   averaging down, no size increase after losses, profits never raise limits, flat by 11:45.
+
+## AMZN budget addendum ~10:12 ET (operator)
+Operator, verbatim: "80$ for mamazon" (answer to: 1=$80 per stock trade, 2=$120, 3=keep $35).
+- AMZN option trades: max premium **$80** (100 × ask + fees ≤ $80), 1 contract, 0.20–0.30 delta nearest
+  expiry, spread ≤ $0.03 and ≤ 15% of mid (unchanged), same exits, same-day close.
+- Program stop-loss raised to cumulative −$80 (as proposed with option 1). Still max 1 filled entry/day.
+- Other stocks stay at $35; SPY/QQQ stay at $35 with affordable delta ≤0.40 (floor 0.10).
+- The 10:09 AMZN signal is NOT taken: spread $0.05 > $0.03 and the signal is stale (no chasing).
