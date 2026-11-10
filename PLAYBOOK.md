@@ -1,5 +1,11 @@
 # 0DTE bot playbook — the single source of truth
 
+> **2026-11-10: owner switched the program to Level 2 (long single-leg calls/puts only).**
+> Condor entry/close routines are DISABLED. The governing rules are now
+> [`docs/SPEC_single_leg_0DTE_v1.md`](docs/SPEC_single_leg_0DTE_v1.md): mode RESEARCH,
+> **live.enabled=false** until every §12 promotion gate passes and the owner approves separately.
+> §§4–6 below describe the retired condor and apply only if the owner re-enables it.
+
 Every routine reads this file first. The chat history of the session is **not** memory: it may be
 cleared at any time (by the owner, or compacted). Everything needed to run tomorrow lives in this
 repo: this playbook, `notes/long_term_notes.md`, `notes/daily_notes.md`, `routine_prompts.md`.
@@ -185,3 +191,17 @@ strike, entry/exit times and prices, reason, P&L (or "no signal"); keep a runnin
 "single-leg paper total since 2026-11-09: N trades, W wins, $P". Commit, push. No email unless a
 data source failed through its whole ladder. The Friday weekly review adds a "Single-leg paper"
 row (trades, win %, total P&L) to notes/long_term_notes.md.
+
+## 10. Level-2 single-leg program (owner spec v1.0, 2026-11-10)
+
+- Rules: docs/SPEC_single_leg_0DTE_v1.md (authoritative). Mode **RESEARCH / PAPER**, live disabled.
+- No routine may place an opening order for this program. Any live order requires a new, explicit
+  owner instruction that acknowledges the spec's §12 gates and §7 premium cap, recorded here first.
+- Spec §7 premium cap = 0.5% of session-start equity per trade: at ~$275 equity that is $1.37, so a
+  0.55–0.65-delta SPY/QQQ 0DTE option (~$100–300 per contract) can never be bought; the correct
+  live decision is NO TRADE until equity is roughly $30k–60k or the owner changes the spec.
+- Spec §8 requires licensed historical OPRA bid/ask quotes for 1,000 sessions (e.g. Databento,
+  paid). Not available in this environment yet → milestone 1 must report coverage and STOP rather
+  than use Black-Scholes prices.
+- §9 (old ORB paper tracker) keeps running as a rough real-data signal check until the spec's
+  paper engine replaces it.
