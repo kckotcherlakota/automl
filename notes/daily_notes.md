@@ -90,3 +90,13 @@ Format per day:
   Target 2.14 / stop 1.07. Target hit in the 10:40-10:45 bar (high 2.24, open 1.79) -> exit 2.14.
 - P&L +$61.12 (target). Caveat: option bars are marks; real fills may differ.
 - single-leg paper total since 2026-11-09: 1 trades, 1 wins, $61.12
+
+## 2026-11-10 (Tue)
+### Morning prep (~09:00 ET)
+- Account MCP ••••8852: option_level_3, limited margin, BP $274.75, no positions, approvals OFF.
+- Last daily report 2026-11-09 present, no KILL SWITCH. Program now V3 micro-$200 (paper only).
+- CPI verified from BLS (primary) 0.4 / core 0.3 vs consensus 0.3 / 0.2 (CNBC as-of 11-09 16:03) ->
+  HOT. EVENT DAY. V3: first entry 10:00 ET, PAPER_ONLY_ON_MACRO_DAY.
+- Premarket 09:12: SPY 748.50 (-0.6%), QQQ 672.26 (-1.0%). Not HIGH RISK.
+- LIVE=REQUESTED_NOT_READY (docs/LIVE_READINESS_2026-11-10.md: gates 1,3,4,5 fail, 2 partial).
+- PLAN: EVENT DAY: SKIP CPI (live). Paper V3-A replay after close.
