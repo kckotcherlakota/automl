@@ -12,3 +12,11 @@ STRATEGY: none validated (A/B/C) -> NO_VERIFIED_EDGE
 REASON=LIVE_BLOCKED_BACKTEST_OR_PAPER, LIVE_BLOCKED_BROKER, LIVE_BLOCKED_DATA_OR_RISK,
        LIVE_BLOCKED_AUTHORIZATION, PAPER_ONLY_ON_MACRO_DAY (see docs/LIVE_READINESS_2026-11-10.md)
 ```
+
+## Verified Investing (YouTube, last ~24 h) — context only, not a signal
+- 09:16 ET Gareth Soloway "Trading Game Plan": "Inflation Keeps Surging, Markets Sell Hard As Concerns
+  Grow Over Stagflation, Gold, Silver, Bitcoin" — https://youtu.be/wbzKXSQATvE (theme: hot CPI, risk-off)
+- 08:43 ET "Pro Trader Firepower": "CPI Report Out Today; Latest on Oil Prices" — https://youtu.be/1HrKiL-6M4c
+- Yesterday: "Market Bounce Extends as NVDA Slips on CEO News", "NVDA Scandal Triggers Buy Signal",
+  storage/AI-infrastructure bounce levels, Bitcoin lost $75K support.
+- Transcripts unavailable (YouTube bot check); titles/descriptions via RSS.
