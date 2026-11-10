@@ -19,3 +19,18 @@ was shown in docs/LIVE_READINESS_2026-11-10.md and the 09:12 email. Scope of thi
 | Max entries | 2 filled per day, 1 open at a time |
 | No trade if | no signal, unaffordable, bad spread/quote, broker rejects, any unknown order state |
 | Monitoring | operated interactively from this Claude session by polling Robinhood quotes (seconds-to-a-minute granularity, NOT a real-time engine); a 11:41 ET safety reminder forces a flatness check |
+
+## Scope addendum ~09:35 ET (operator)
+Operator, verbatim: "For company stocks, plan for some option and try selling it on the same day. Like
+whatever option that you feel is worth it, take that option, and if you get profits, you can sell it.
+So plan accordingly when you do company stocks. When you do ETFs, do zero DTE."
+
+Implemented deterministically (no discretionary picks — V3 forbids LLM-invented signals):
+- ETFs SPY/QQQ: 0DTE, Strategies A/B/C (unchanged).
+- Company stocks: watchlist AAPL, NVDA, TSLA, AMD, META, AMZN, MSFT, PLTR. Signal = Strategy A
+  (ORB+VWAP+EMA, same thresholds) on the stock itself; SMT not used for single names (needs a pair).
+  Contract = nearest listed expiration (Fri 2026-11-13), BUY-TO-OPEN call/put, |delta| 0.20–0.30,
+  V3 spread/quote filters, 1 contract.
+- Same shared $40 envelope ($35 usable), 1 open position at a time, ≤2 filled entries/day in total.
+- Exits identical to V3 §7.2, and **always closed the same session** (deadline 11:40, flat by 11:45),
+  even at a loss: V3 forbids overnight exposure.
