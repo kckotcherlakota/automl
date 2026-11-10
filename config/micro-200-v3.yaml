@@ -1,0 +1,78 @@
+version: '3.0'
+account:
+  starting_equity_usd: 200.00
+  broker: robinhood_trading_mcp
+  require_verified_agentic_account: true
+  require_settled_cash_if_cash_account: true
+  cash_reserve_usd: 5.00
+trading:
+  mode: PAPER                     # LIVE_REQUESTED does not mean LIVE_ENABLED
+  live_requested_date: '2026-11-10'
+  live_enabled: false
+  require_independent_live_release: true
+  symbols: [SPY, QQQ]
+  long_single_leg_0dte_only: true
+  max_open_contracts: 1
+  max_filled_entries_per_day: 2
+  allow_second_trade_only_if_validated: true
+  timezone: America/New_York
+  regular_entry_start: '09:50'
+  high_impact_0830_entry_start: '10:00'
+  entry_end: '11:30'
+  exit_deadline_start: '11:40'
+  broker_confirmed_flat_target: '11:45'
+  no_forced_trade: true
+risk:
+  hard_daily_loss_allowance_usd: 40.00
+  loss_budget_method: CUMULATIVE_FILLED_BUY_DEBITS_PLUS_PENDING_RESERVED_BUY_DEBITS
+  do_not_replenish_spend_budget_after_any_exit: true
+  default_session_fee_contingency_usd: 5.00
+  gross_debit_budget_before_prior_losses_usd: 35.00
+  apply_account_drawdown_halts: true
+  no_margin_or_borrowing: true
+  no_averaging_down: true
+options:
+  preferred_abs_delta: 0.25
+  min_abs_delta: 0.20
+  max_abs_delta: 0.30
+  max_spread_abs_usd: 0.03
+  max_spread_mid_ratio: 0.15
+  max_quote_age_seconds: 3
+  require_actual_fresh_nbbo_and_liquid_bid: true
+  normal_multiplier: 100
+exits:
+  early_profit_arm_net_usd: 3.00
+  early_profit_arm_fraction_of_entry_debit: 0.15
+  immediate_take_profit_net_usd: 5.00
+  immediate_take_profit_fraction_of_entry_debit: 0.25
+  trailing_giveback_net_usd: 1.50
+  trailing_giveback_fraction_peak: 0.30
+  attempted_stop_pct_option_premium: 0.25
+  attempted_loss_cut_usd: 8.00
+  time_stop_completed_one_minute_bars: 12
+  profit_calculated_at_actual_bid_net_of_all_costs: true
+news:
+  enabled: true
+  require_primary_source_actuals_and_asof_consensus: true
+  major_releases: [CPI, PPI, NFP, FOMC, PCE, GDP, RETAIL_SALES]
+  today_high_impact_event: CPI
+  today_0830_release_verified: false   # set only after real source verification
+  no_pre_release_directional_guess: true
+  no_trade_on_unknown_news_state: true
+  intraday_event_blackout_before_minutes: 15
+  intraday_event_blackout_after_minutes: 20
+  require_separate_high_impact_out_of_sample_evidence: true
+research:
+  strategies: [ORB_VWAP, SMT_REVERSAL, SMT_TREND_HYBRID]
+  chronological_sessions: 1000
+  require_real_option_nbbo: true
+  require_frozen_walkforward_and_holdout: true
+  forward_paper_sessions: 60
+safety:
+  broker_reconcile_before_entry_and_after_exit: true
+  require_exit_fill_confirmation: true
+  unknown_order_fail_closed: true
+  complete_trade_ledger: true
+  no_automatic_model_retraining_to_live: true
+  no_automatic_increase_to_40_dollar_limit: true
+  no_orders_when_event_day_not_validated: true
