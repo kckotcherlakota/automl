@@ -34,3 +34,12 @@ Implemented deterministically (no discretionary picks — V3 forbids LLM-invente
 - Same shared $40 envelope ($35 usable), 1 open position at a time, ≤2 filled entries/day in total.
 - Exits identical to V3 §7.2, and **always closed the same session** (deadline 11:40, flat by 11:45),
   even at a loss: V3 forbids overnight exposure.
+
+## Delta addendum ~10:05 ET (operator)
+Operator, verbatim: "Try 40 delta or affordable delta for spy qqq"
+- SPY/QQQ contract selection (overrides V3 §6 band for today): choose the HIGHEST |delta| ≤ 0.40 whose
+  ask fits the remaining budget (100 × ask + $0.04 fees ≤ $35 − used), floor |delta| ≥ 0.10 (bot
+  safety floor, operator may change). Spread ≤ $0.03 and ≤ 15% of mid still required.
+- Observed at 09:58: 0.29Δ 753C $0.92, 0.22Δ 754C $0.65, −0.24Δ 746P $0.83, −0.20Δ 745P $0.66 — all over
+  $35; a 0.40Δ contract costs ~$1.2+, so selection will normally land in ~0.10–0.20Δ this morning.
+- Company stocks unchanged (0.20–0.30Δ nearest expiry).
