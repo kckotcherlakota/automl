@@ -8,6 +8,14 @@ Durable lessons and running statistics. Updated once a week (Friday weekly revie
 
 ## LIVE bot capital ledger (bot capital $200; program stop at cumulative -$80 since 2026-11-10 10:12)
 - 2026-11-10: start $200.00, cumulative live P&L $0.00
+- 2026-11-10 trade 1: SPY 0DTE 753C (Strategy B SMT), bought 0.28 11:04, stopped 0.21 11:11 -> -$7.08 (incl. $0.08 fees). Cumulative -$7.08; bot capital $192.92; $72.92 left before the -$80 program stop.
+
+## Lessons (2026-11-10 live)
+- Broker stop_market at the -25% level fired at 0.21 while my polled bid read 0.22-0.24: the stop
+  triggers on prints, not only the bid. On ~$0.28 0DTE options a 1-2 cent wiggle hits -25%. With
+  0.10-0.13 delta the -25% stop is roughly a 0.5-point SPY move; theta adds ~1c every few minutes.
+- The OTM 0.13Δ 753C was the only SPY call under $35. Cheap deltas mean option noise dominates the
+  setup; record this for the paper/backtest review before raising frequency.
 
 ## Setup (routine IDs; all run in session session_012ZPnNbEARMTpMMQ1Weeq33, New York time)
 - LIVE from 2026-11-09, SPY condor only (QQQ off), close by 15:44 (Robinhood auto-closes at-risk

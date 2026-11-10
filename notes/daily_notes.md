@@ -108,3 +108,9 @@ Format per day:
   NO_TRADE: 0.20d Nov-11 277.5C bid/ask 0.67/0.72 -> $72 > $35 budget AND spread $0.05 > $0.03 max.
   0.11d 280C $0.36 below stock delta floor 0.20.
 - 10:45 NVDA PUT breakout (5m 10:40-10:45 close 169.71 < ORL 170.65, below VWAP, EMA down). Contracts 11-11: 165P 0.28Δ ask 1.39 ($139 > $80 cap); 162.5P 0.19Δ ask 0.85 ($85, Δ<0.20 and > cap); 167.5P 0.40Δ 2.21. NO_TRADE (premium cap) regardless of retest.
+- 11:00 Strategy B BULL SMT SPY vs QQQ: SPY swept ORL 747.05 at 10:57 (ext 746.735), QQQ held; MSS+displacement 11:00 (close 747.89); FVG 11:01 (low 747.71 > 10:59 high 747.27, mid 747.49); 11:02 touched but closed 747.45 (no); 11:03 low 747.31 close 748.20 -> CONFIRMED, signal 11:04.
+- **ENTRY 11:04:34 BUY 1 SPY 2026-11-10 753C @ 0.28 FILLED** (order 6af34092; 0.129Δ; bid/ask 0.27/0.28; $28 + $0.04 fees). 752C $42 > $35 cap.
+  Exits: TP bid>=0.34 (net>=$5); trail arm bid>=0.32 (net>=$3), giveback>=max($1.50,30% peak); stop bid<=0.21 (broker stop_market 6af340b0 resting); invalidation 1m close < 746.585; time exit after 11:16 bar (12 bars); deadline 11:40.
+- **EXIT 11:11:32 broker stop_market (6af340b0) filled @ 0.21** -> P&L -$7.00 premium, -$7.08 with fees. Peak bid 0.28 at 11:09 (never armed the trail). SPY 747.46 at exit, above invalidation; option decay + noise hit -25%.
+- Broker-confirmed flat 11:12 (no nonzero option positions). Max 1 entry/day used -> NO further entries today.
+- Note: another agent traded IWM 0DTE on this account today (282C 0.30->0.53, 278P 0.40->0.53); not part of this bot's ledger.
