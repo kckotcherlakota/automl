@@ -1,5 +1,10 @@
 # $100 bot — routine prompts (paste-ready, self-contained)
 
+**Current mode: LIVE since 2026-11-09 — SPY condor only, closed 15:38–15:44 ET, $200 cap.**
+**All rules now live in [`PLAYBOOK.md`](PLAYBOOK.md).** The routines installed today are short
+wrappers listed in the "Installed routines" section at the END of this file. Everything in between
+is history (dry-run versions, snapshots, bull put — disabled).
+
 Create two routines, each **starting a fresh session on every run**, scheduled in New York time,
 Monday–Friday:
 
@@ -11,7 +16,7 @@ Monday–Friday:
 - **Day-trade fallback:** if your broker still enforces a day-trade limit, use `1,3,5` instead of `1-5`.
 - **Connectors:** the session that runs them needs the **Robinhood** and **Gmail** connectors.
   **FMP** is optional.
-- **Before creating them:** replace `<YOUR_EMAIL>` in both prompts.
+- **Email:** reports go to `kckota9@gmail.com` (already filled in both prompts).
 - **Going live:** change `MODE=DRY_RUN` to `MODE=LIVE` only after the 2–3 week dry run (see
   README).
 
@@ -25,7 +30,7 @@ If MODE=DRY_RUN you must NOT call review_option_order, place_option_order or any
 read-only Robinhood calls and email only.
 
 Account: the Robinhood account nicknamed "MCP" (the one get_accounts marks as tradable by you).
-Never use any other account. Email every report to <YOUR_EMAIL> with the Gmail connector.
+Never use any other account. Email every report to kckota9@gmail.com with the Gmail connector.
 
 Pre-checks — on any failure, email "0DTE bot: skipped - <reason>" and stop:
  a. get_accounts: the MCP account must have option_level_3.
@@ -63,7 +68,7 @@ The 15:50 close routine reads this JSON.
 ```
 MODE=DRY_RUN. $100 SPY+QQQ 0DTE condor end-of-day close (15:50 America/New_York).
 If MODE=DRY_RUN you must NOT call review_option_order, place_option_order or any order/cancel tool.
-Account: Robinhood "MCP" only. Email reports to <YOUR_EMAIL> with the Gmail connector.
+Account: Robinhood "MCP" only. Email reports to kckota9@gmail.com with the Gmail connector.
 
 LIVE: find open SPY and QQQ option positions expiring today (get_option_positions nonzero=true).
 For each symbol close ALL legs in one 4-leg limit DEBIT order (buy to close shorts, sell to close
@@ -79,7 +84,186 @@ P&L per symbol = (entry credit - closing debit) * 100 * quantity - 0.05 * 8 * qu
 Email subject "0DTE daily report <YYYY-MM-DD>":
  - per symbol: entry credit, closing debit, P&L, win/loss
  - running totals from all earlier "0DTE daily report" emails: trades, win rate, total P&L,
-   peak and drawdown (start equity $100)
+   peak and drawdown (start equity $204.29, dry run from 2026-11-09)
  - put "KILL SWITCH - bot stopped" at the TOP if: 3 losing days in a row, or equity < 50% of peak,
    or equity < $70 (can't fund one condor).
+ - DRY_RUN close-time comparison: per symbol, put today's "### Snapshot" results for 15:35 and
+   15:40 from notes/daily_notes.md next to 15:50 (natural closing debit, P&L with mid credit and
+   with natural credit; say "missing" if a snapshot is absent), and keep the running totals above
+   separately for each close time (15:35 / 15:40 / 15:50). The kill switch uses the 15:40 column.
 ```
+
+---
+
+# Notes system (memory between days)
+
+All routines run inside one persistent Claude session (the org does not allow connectors on
+fresh-session routines), so the chat history grows and is compacted automatically. The bot
+does **not** rely on it: every run treats earlier chat as stale and works only from fresh
+Robinhood/Gmail data plus two files in this repo, on branch `claude/busy-davinci-8zond5`:
+
+| file | written | cleared |
+|---|---|---|
+| `notes/daily_notes.md` | morning prep, entry, close (each appends its section for today) | every Friday by the weekly review |
+| `notes/long_term_notes.md` | weekly review (summary, running totals, lessons) | never; kept short |
+
+Four routines, all Mon–Fri New York time unless noted:
+
+| routine | cron |
+|---|---|
+| `0DTE morning prep (DRY RUN)` | `CRON_TZ=America/New_York 7 9 * * 1-5` |
+| `0DTE condor entry (DRY RUN)` | `CRON_TZ=America/New_York 30 14 * * 1-5` |
+| `0DTE snapshot 15:35 (DRY RUN)` | `CRON_TZ=America/New_York 35 15 * * 1-5` |
+| `0DTE snapshot 15:40 + bull put close (DRY RUN)` | `CRON_TZ=America/New_York 40 15 * * 1-5` |
+| `0DTE bull put entry (DRY RUN)` | `CRON_TZ=America/New_York 45 9 * * 1-5` |
+| `0DTE condor close (DRY RUN)` | `CRON_TZ=America/New_York 50 15 * * 1-5` |
+| `0DTE weekly review` | `CRON_TZ=America/New_York 17 16 * * 5` (Fridays) |
+| `0DTE daily session clear` (prompt: `/clear`) — **disabled**: a routine-sent `/clear` does not clear the session | `CRON_TZ=America/New_York 13 17 * * 1-5` |
+
+The entry and close routines run the prompts above **followed by** the notes protocol below.
+
+## Notes protocol (appended to the entry and close prompts)
+
+```
+NOTES PROTOCOL (memory between days; do this as well as the steps above):
+- Earlier messages in this conversation are stale. Do not reuse any number, quote, strike or
+  conclusion from them. Your memory between runs is ONLY the two notes files plus fresh data.
+- START, before anything else: cd /home/user/automl (if missing: git clone
+  https://github.com/kckotcherlakota/automl /home/user/automl). Then
+  git fetch origin claude/busy-davinci-8zond5 && git checkout claude/busy-davinci-8zond5 &&
+  git pull --ff-only origin claude/busy-davinci-8zond5.
+  Read notes/long_term_notes.md and notes/daily_notes.md in full. Follow today's morning-prep
+  plan if there is one; if it is missing, do the morning-prep checks yourself first.
+- END, after the email is sent: append this step's section under today's "## YYYY-MM-DD (Day)"
+  heading in notes/daily_notes.md (create the heading if missing), following the format at the
+  top of that file. Entry step: "### Entry (14:30 ET)". Close step: "### Close (15:50 ET)" and
+  then "### Learnings" (real vs model credit, anything unexpected, tool/data problems; mark
+  untested ideas as untested). Keep each section under ~15 lines.
+  Then: git add notes && git commit -m "notes: <YYYY-MM-DD> <entry|close>" with the trailer
+  lines "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" and
+  "Claude-Session: https://claude.ai/code/session_012ZPnNbEARMTpMMQ1Weeq33";
+  git push -u origin claude/busy-davinci-8zond5 (on a network error retry up to 4 times,
+  waiting 2s, 4s, 8s, 16s). If the push still fails, say so in the email.
+- Never write account numbers in full, secrets or tokens into the notes.
+```
+
+## 0DTE morning prep (09:07 ET, Mon–Fri)
+
+```
+MODE=DRY_RUN. $100 SPY+QQQ 0DTE condor bot, MORNING PREP (09:07 America/New_York). Read-only:
+do NOT call review_option_order, place_option_order or any order/cancel tool.
+Account: Robinhood "MCP" only. Email to kckota9@gmail.com with the Gmail connector ONLY if
+something needs my attention (see below); otherwise no email.
+
+Earlier messages in this conversation are stale; do not reuse anything from them.
+1. cd /home/user/automl (if missing: git clone https://github.com/kckotcherlakota/automl
+   /home/user/automl); git fetch origin claude/busy-davinci-8zond5 && git checkout
+   claude/busy-davinci-8zond5 && git pull --ff-only origin claude/busy-davinci-8zond5.
+   Read notes/long_term_notes.md and notes/daily_notes.md in full.
+2. Checks (read-only):
+   a. get_accounts: MCP still has option_level_3.
+   b. Market open today and not a half-day; SPY expiration dated today (get_option_chains SPY);
+      same for QQQ.
+   c. get_portfolio: buying power and account value. Can it fund SPY (~$61) and QQQ (~$70)?
+   d. get_option_positions nonzero=true: any open option positions (there should be none).
+   e. Gmail: latest "0DTE daily report" - KILL SWITCH present? Did yesterday's close run
+      (a daily report exists for the last trading day)?
+   f. Optional: FMP economics calendar - FOMC decision, CPI or nonfarm payrolls today?
+   g. get_trade_approval_setting for MCP (record on/off; must be ON before LIVE).
+3. Append "## YYYY-MM-DD (Day)" and "### Morning prep (~09:00 ET)" to notes/daily_notes.md:
+   the results above plus a short plan for 14:30 (which symbols to price, event-day flag,
+   anything from long-term or daily notes to watch). Keep it under ~12 lines.
+4. Commit "notes: <YYYY-MM-DD> morning prep" with trailer lines
+   "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" and
+   "Claude-Session: https://claude.ai/code/session_012ZPnNbEARMTpMMQ1Weeq33", then
+   git push -u origin claude/busy-davinci-8zond5 (retry up to 4 times: 2s, 4s, 8s, 16s).
+5. Email "0DTE morning prep: ATTENTION <YYYY-MM-DD>" only if: market closed/half-day,
+   KILL SWITCH, yesterday's close missing, open positions found, buying power < $70, options
+   level changed, or the notes push failed. Never write full account numbers or secrets.
+```
+
+## 0DTE weekly review (16:17 ET, Fridays)
+
+```
+$100 SPY+QQQ 0DTE condor bot, WEEKLY REVIEW (Friday 16:17 America/New_York). Read-only on
+Robinhood: do NOT call review_option_order, place_option_order or any order/cancel tool.
+Earlier messages in this conversation are stale; do not reuse anything from them.
+1. cd /home/user/automl (clone https://github.com/kckotcherlakota/automl there if missing);
+   git fetch origin claude/busy-davinci-8zond5 && git checkout claude/busy-davinci-8zond5 &&
+   git pull --ff-only origin claude/busy-davinci-8zond5. Read both notes files in full.
+   Cross-check numbers against this week's "0DTE daily report" emails in Gmail.
+2. Update notes/long_term_notes.md:
+   - add one row to "Running totals" for this week (trades, wins, win %, week P&L mid and
+     natural, cumulative natural P&L, peak, drawdown);
+   - update "Real vs model credit" with this week's average real mid/natural credit vs the
+     model's $0.35-0.45 and the % gap;
+   - add at most 5 new bullets to "Lessons" (newest first); merge or delete lessons that are
+     now duplicated or proven wrong; keep the whole file under ~150 lines;
+   - update "Open questions"; after 10-15 dry-run trading days, add a go/no-go line using the
+     README rule (credits within ~15% of model, paper P&L not clearly negative).
+3. Reset notes/daily_notes.md to just its header and format block (everything above the
+   first "---" line plus that line), deleting the week's day entries.
+4. Commit "notes: weekly review week ending <YYYY-MM-DD>" with trailer lines
+   "Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>" and
+   "Claude-Session: https://claude.ai/code/session_012ZPnNbEARMTpMMQ1Weeq33"; git push -u origin
+   claude/busy-davinci-8zond5 (retry up to 4 times: 2s, 4s, 8s, 16s).
+5. Email kckota9@gmail.com (Gmail connector) "0DTE weekly review <YYYY-MM-DD>": the week's row,
+   cumulative totals, real-vs-model credit, new lessons, and go/no-go status if due.
+```
+
+## 0DTE snapshot 15:35 / 15:40 (DRY RUN, Mon–Fri)
+
+Two routines with the same prompt except the time (routines must be ≥ 1 hour apart, so one
+routine cannot run at both 15:35 and 15:40). Read-only, no email: they read today's entry JSON
+from Gmail, quote the 4 legs, compute natural/mid closing debit and P&L, and append
+"### Snapshot HH:MM ET" to `notes/daily_notes.md`. The 15:50 close report compares all three
+close times; the weekly review keeps running totals per close time. Purpose: test whether the
+edge survives a close before Robinhood's 15:45 auto-close of at-risk late-close options.
+
+## Bull put spread dry run (article strategy)
+
+`0DTE bull put entry (DRY RUN)` at 09:45 ET quotes the SPY 0DTE put spread: short put =
+floor(spot × 0.98), long put = short − $2. It records mid/natural credit, collateral and VIX,
+and two flags: `backtest_would_trade` (natural credit > $0.02) and `live_rule_would_trade`
+(mid credit ≥ $0.10, collateral ≤ buying power, VIX ≤ 30). It emails "0DTE bull put DRY
+<date>" with a JSON block. The 15:40 snapshot routine prices the close and P&L; the 15:50
+daily report and the Friday review keep separate running totals per rule. Read-only throughout.
+
+---
+
+# LIVE configuration (from 2026-11-09)
+
+Owner's choices on 2026-11-08: condor LIVE, **SPY only**, close **by 15:44 ET** (ahead of
+Robinhood's 15:45 auto-close of at-risk expiring late-close options), bull put spread dropped.
+
+| routine | cron | change from dry run |
+|---|---|---|
+| `0DTE morning prep (LIVE, SPY)` | `CRON_TZ=America/New_York 7 9 * * 1-5` | SPY only; emails if trade approvals are OFF |
+| `0DTE condor entry (LIVE, SPY)` | `CRON_TZ=America/New_York 30 14 * * 1-5` | MODE=LIVE, SPY only, skips if any option position is open, no opening orders after 15:00 |
+| `0DTE condor close (LIVE, SPY, 15:38)` | `CRON_TZ=America/New_York 38 15 * * 1-5` | closes FIRST (before notes), natural debit, +0.02/min to 15:43, then natural + 0.05; URGENT email if anything is open at 15:44 |
+| `0DTE weekly review` | `CRON_TZ=America/New_York 17 16 * * 5` | live totals, slippage per leg vs model, 20-trade review |
+
+Disabled: 15:35 snapshot, 15:40 snapshot + bull put close, bull put entry, daily `/clear`.
+**Budget:** hard cap of **$200** for this bot (owner, 2026-11-08): always 1 contract, skip if
+collateral > min(buying power, $200), no scaling with account size.
+
+Kill switch (in the close report): 3 losing days in a row, equity < 50% of peak, or equity < $70.
+
+---
+
+# Installed routines (2026-11-09) — wrappers around PLAYBOOK.md
+
+All fire into session `session_012ZPnNbEARMTpMMQ1Weeq33` (New York time). If the chat is cleared,
+the routines keep firing and rebuild their context from PLAYBOOK.md + notes/.
+
+| id | name | cron |
+|---|---|---|
+| trig_01R4cdsFSJEjPmRR2157m314 | 0DTE morning prep (LIVE, SPY) | `CRON_TZ=America/New_York 7 9 * * 1-5` |
+| trig_01U4piD2uwooiZf8YGWNP81z | 0DTE condor entry (LIVE, SPY) | `CRON_TZ=America/New_York 30 14 * * 1-5` |
+| trig_01PQpQw3NJam4eySAJ8ZS2f7 | 0DTE condor close (LIVE, SPY, 15:38) | `CRON_TZ=America/New_York 38 15 * * 1-5` |
+| trig_0161yiuFh5aixJVJpB5BcwFo | 0DTE weekly review | `CRON_TZ=America/New_York 17 16 * * 5` |
+
+- Morning prep / entry / weekly review: pull the repo, read PLAYBOOK.md + both notes files, run
+  PLAYBOOK §4 / §5 / §7. Entry does NOT trade if the repo can't be read.
+- Close: self-contained closing steps (PLAYBOOK §6 steps 1–3 inlined) run FIRST, without needing
+  git; then the report email and notes incl. "### Handoff for tomorrow".

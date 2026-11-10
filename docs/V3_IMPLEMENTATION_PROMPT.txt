@@ -1,0 +1,13 @@
+Read SPY_QQQ_0DTE_MICRO_200_CLAUDE_CODE_V3_LIVE_REQUESTED.md in full and use micro-200-v3.yaml as the proposed, paper-safe configuration.
+
+I want the $200 SPY/QQQ 0DTE single-leg system updated to absolute delta 0.20–0.30, with prompt net-profit taking, a $40 maximum daily full-premium loss envelope, morning news/event monitoring, and full posttrade and end-of-day reconciliation. I requested live from November 10, 2026. Treat that as LIVE_REQUESTED, not as proof of operational readiness.
+
+Inspect the repository's current rules and running configuration first. Produce a migration diff from the V2 rules and list conflicting code/tests. Do not destroy existing files. Discover the actual supported Robinhood Trading MCP capabilities and verify the dedicated account and permissions.
+
+Read today's verified official CPI release and scheduled events from primary sources; record time-stamped consensus and actual values. Do not trade based solely on a news headline. On a CPI day first eligible entry is 10:00 AM Eastern if event-specific strategy has validated out-of-sample edge; otherwise paper-only.
+
+Build the Java 17/Spring Boot strategy, daily-risk ledger, news service, option quote selector, order reconciler, historical quote replay, 1,000-session locked walk-forward backtest and 60-session forward-paper evidence. Use actual OPRA bid/ask, not Black-Scholes theoretical fill prices. Maintain one option contract open at a time and no more than two eligible fills per day if proven; no forced trades. Track ALL filled entry debits and pending reservations cumulatively, never recycle wins to replenish the gross $35 premium budget plus $5 fee contingency. Money values must use BigDecimal.
+
+Make the live-readiness report first and show explicitly whether every independent live gate already passed. If NOT, preserve live_enabled=false, monitor news and run paper mode, and list blockers. If all gates already passed, show a separately reviewed operator-controlled launch checklist before any order; never bypass safety checks for today's requested date.
+
+Do not claim success, profit, live activation, broker connection, or filled orders without actual verifiable evidence. Deliver reproducible code, tests, daily morning/after-close report examples, and logs that distinguish paper from live.
