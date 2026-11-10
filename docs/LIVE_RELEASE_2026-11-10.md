@@ -43,3 +43,12 @@ Operator, verbatim: "Try 40 delta or affordable delta for spy qqq"
 - Observed at 09:58: 0.29Δ 753C $0.92, 0.22Δ 754C $0.65, −0.24Δ 746P $0.83, −0.20Δ 745P $0.66 — all over
   $35; a 0.40Δ contract costs ~$1.2+, so selection will normally land in ~0.10–0.20Δ this morning.
 - Company stocks unchanged (0.20–0.30Δ nearest expiry).
+
+## Capital-protection addendum ~10:09 ET (operator)
+Operator, verbatim: "Keep in mind 200$ is all you have and capital must be secured"
+Tightened (allowed by V3 §7.1 "operator may request a smaller limit"):
+- Max **1 filled entry per day** (was 2). After any fill, no new entries that session.
+- **Program stop-loss:** cumulative live bot P&L ≤ −$40 (20% of the $200 bot capital) → live disabled
+  until the operator re-approves in writing. Tracked in notes/long_term_notes.md.
+- Unchanged: ≤ $35 premium/day + $5 fee contingency (worst day ≈ −$40), $8 / −25% loss cut, no
+  averaging down, no size increase after losses, profits never raise limits, flat by 11:45.

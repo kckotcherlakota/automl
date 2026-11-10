@@ -6,6 +6,9 @@ Durable lessons and running statistics. Updated once a week (Friday weekly revie
 ## 2026-11-10 PROGRAM CHANGE: Level 2 single-leg only (docs/SPEC_single_leg_0DTE_v1.md). Condor
 ## entry trig_01U4piD2uwooiZf8YGWNP81z and close trig_01PQpQw3NJam4eySAJ8ZS2f7 DISABLED. Live disabled.
 
+## LIVE bot capital ledger (bot capital $200; program stop at cumulative -$40)
+- 2026-11-10: start $200.00, cumulative live P&L $0.00
+
 ## Setup (routine IDs; all run in session session_012ZPnNbEARMTpMMQ1Weeq33, New York time)
 - LIVE from 2026-11-09, SPY condor only (QQQ off), close by 15:44 (Robinhood auto-closes at-risk
   expiring options from 15:45). Owner chose: 15:40-style close, SPY only, bull put dropped.
